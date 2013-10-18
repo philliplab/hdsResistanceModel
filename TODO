@@ -1,1 +1,2 @@
-(C) ADD type checking to get_de_defaults +tests
+(C) ADD type checking to get_de_defaults +input_cleanup
+(B) ADD more checks to scenario +input_cleanup

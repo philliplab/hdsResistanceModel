@@ -8,7 +8,9 @@ Maintainer: Phillip Labuschagne <philliplab@gmail.com>
 Depends:
     testthat,
     ggplot2,
-    grid
+    grid,
+    stringr
 License: GPL-2
 Collate:
     'get_de_defaults.R'
+    'scenario.R'
