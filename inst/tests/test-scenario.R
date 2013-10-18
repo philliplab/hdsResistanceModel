@@ -11,7 +11,7 @@ scenario_spec <- list(
     Td = 0.2,
     N_S = 3,
     offStrains = c(2,3),
-    stochasticEventThreshold = function(){return(runif(1))},
+    stochasticEventThresholdSource = function(){return(runif(1))},
     Epow = c(0, 2, 2,
              2, 0, 2,
              2, 2, 0)
@@ -21,7 +21,7 @@ test_that("A correct specification yields a correctly formatted list",{
   x <- do.call(scenario, scenario_spec)
   x_names <- sort(names(x))
   expected_names <- sort(c("Epow", "mutationAcceleration", "N_S", "offStrains", "Pf", 
-                           "stochasticEventThreshold", "systemDescription", "systemName", 
+                           "stochasticEventThresholdSource", "systemDescription", "systemName", 
                            "Td", "timeStep", "timeStop", "treatments"))
   expect_that(x, is_a('list'))
   expect_that(x[['timeStep']], equals(1))
@@ -34,7 +34,7 @@ test_that("A correct specification yields a correctly formatted list",{
   expect_that(x[['Td']], equals(0.2))
   expect_that(x[['N_S']], equals(3))
   expect_that(x[['offStrains']], equals(c(2,3)))
-  expect_that(x[['stochasticEventThreshold']], equals(function(){return(runif(1))}))
+  expect_that(x[['stochasticEventThresholdSource']], equals(function(){return(runif(1))}))
   expect_that(x[['Epow']], equals(c(0, 2, 2, 2, 0, 2, 2, 2, 0)))
   expect_that(x_names, equals(expected_names))
 })

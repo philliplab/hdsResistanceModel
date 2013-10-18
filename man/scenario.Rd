@@ -5,7 +5,7 @@
   scenario(timeStep, timeStop, systemName,
     systemDescription, Pf, treatments,
     mutationAcceleration, Td, N_S, offStrains,
-    stochasticEventThreshold, Epow)
+    stochasticEventThresholdSource, Epow)
 }
 \arguments{
   \item{timeStep}{The size of the steps in the output data}
@@ -46,8 +46,8 @@
   \item{Epow}{The mutation matrix.}
 }
 \description{
-  The main goal of this function is as a placeholder for an
-  expansion that will allow the scenarios to be saved in a
-  database.
+  The main goal of this function is to perform sanity
+  checks on a scenario specification and to provide
+  documentation for the input parametes
 }
 

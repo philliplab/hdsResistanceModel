@@ -1,7 +1,7 @@
 #' Checks input list for problems and throw an error or returns a valid scenario specification
 #' 
-#' The main goal of this function is as a placeholder for an expansion that will allow the
-#' scenarios to be saved in a database.
+#' The main goal of this function is to perform sanity checks on a scenario specification and to provide
+#' documentation for the input parametes
 #' 
 #' @param timeStep The size of the steps in the output data
 #' @param timeStop Run the system until this time
@@ -19,7 +19,7 @@
 
 scenario <- function(timeStep, timeStop, systemName, systemDescription, 
                      Pf, treatments, mutationAcceleration, Td, N_S, 
-                     offStrains, stochasticEventThreshold, Epow){
+                     offStrains, stochasticEventThresholdSource, Epow){
   
   # check that numeric variables are numeric
   numeric_variables <- c("Epow", "mutationAcceleration", "N_S", "offStrains", "Pf", "Td", "timeStep", "timeStop")
@@ -41,7 +41,7 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
     Td = Td,
     N_S = N_S,
     offStrains = offStrains,
-    stochasticEventThreshold = stochasticEventThreshold,
+    stochasticEventThresholdSource = stochasticEventThresholdSource,
     Epow = Epow
     )
 }
