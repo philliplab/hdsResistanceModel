@@ -6,3 +6,4 @@
 (A) tests for the de_system.R functions +tests
 (C) Expand steady state solver to use a root finding function
 (C) Can plot_component be done better? +code_cleanup
+(A) Write some examples into the documentation +documentation
