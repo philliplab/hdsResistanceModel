@@ -1,12 +1,12 @@
 #' This function transforms the input parameters into a format that the equations can use
 #' 
-#' @param constants The parameters that are unlikely to change from scenario to scenario, 
+#' @param de_defaults The parameters that are unlikely to change from scenario to scenario, 
 #' as produced by get_de_defaults 
 #' @param scenario_parameters The parameters that specify the scenario
 #' @export
 
-compute_parameters <- function(constants, scenario_parameters){
-  params <- constants
+compute_parameters <- function(de_defaults, scenario_parameters){
+  params <- de_defaults
   for (par_name in names(scenario_parameters)){
     params[[par_name]] <- scenario_parameters[[par_name]]
   }
