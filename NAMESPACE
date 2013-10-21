@@ -1,4 +1,5 @@
 export(compute_parameters)
+export(eventFunc)
 export(get_de_defaults)
 export(get_scenario)
 export(rootFunc)

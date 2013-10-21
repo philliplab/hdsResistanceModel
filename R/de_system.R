@@ -62,3 +62,97 @@ rootFunc <- function(t, y, parms){
   mutationEvent <- state[N_S+2]-stochasticEventThreshold
   return(mutationEvent)
 }
+
+#' The event function. Manipulates the state and parameter functions of thee system
+#' 
+#' @param t time in the system
+#' @param y state variables
+#' @param parms The extra system parameters
+#' @export
+
+eventFunc <- function(t, y, parms){
+  state <- y
+  find_event_type <- function(t, state){
+    event_type <- 'treatment_change_event'
+    # I have no idea why there is an event at t==0
+    if (t ==0) {event_type <- 'weird_first_event'}
+    if (abs(state[N_S+2]-stochasticEventThreshold) < 0.001){
+      event_type <- 'mutation_event'
+    }
+    if (any((state > deathThreshold) & (state < offThreshold))){
+      event_type <- 'extinction_event'
+    }
+    return(event_type)
+  }
+  
+  mutation_event <- function(){
+    # parse arguments
+    P <- matrix(state[1:N_S], nrow = N_S)
+    Tc <- state[N_S+1]
+    LAMBDA <- state[(N_S+2)]
+    
+    # find which strain appears
+    mutationContributions <- (mutateDisc %*% (P * k *Tc))
+    newStrain = sample(x = 1:N_S,
+                       size = 1,
+                       replace = FALSE,
+                       prob = mutationContributions)
+    stopifnot(newStrain %in% offStrains)
+    
+    # update the offStrains - remove the strain which appeared
+    offStrains <<- offStrains[-match(newStrain, offStrains)]
+    
+    # rebuild the mutation rate matrices
+    mutateCont <<- toggle_mutation_matrix(E, offStrains, type = 'continuous', N_S)
+    mutateDisc <<- toggle_mutation_matrix(E, offStrains, type = 'discrete', N_S)
+    stochasticEventThreshold <<- stochasticEventThresholdSource()
+    
+    # update and return the state variables with the new strain present
+    state[newStrain] <- 1 # init the new strain
+    state[N_S+2] <- 1 # reset the mutation counter
+    return(state)
+  }
+  
+  extinction_event <- function(){
+    extinctStrain <- which((state > deathThreshold) & (state < offThreshold))
+    state[extinctStrain] <- deathThreshold/1.001
+    offStrains <<- c(offStrains, extinctStrain)
+    mutateCont <<- toggle_mutation_matrix(E, offStrains, type = 'continuous', N_S)
+    mutateDisc <<- toggle_mutation_matrix(E, offStrains, type = 'discrete', N_S)
+    return (state)
+  }
+  
+  treatment_change_event <- function(){
+    treatmentChanges <- lapply(treatments, `[[`, 't')
+    treatmentTriggered <- which(t > unlist(treatmentChanges))
+    k <<- baseRate * Pf * (1 - treatments[[treatmentTriggered]]$Ts * treatments[[treatmentTriggered]]$Te) # effective per strain invasion rates
+    treatments[[treatmentTriggered]] <<- NULL
+    return (state)
+  }
+  weird_first_event <- function(){
+    return(state)
+  }
+  
+  event_type <- find_event_type(t, state)
+  print (c(t, event_type))
+  
+  if (event_type == 'weird_first_event'){
+    state <- state
+  }
+  if (event_type == 'mutation_event'){
+    state <- mutation_event()
+  }
+  if (event_type == 'extinction_event'){
+    state <- extinction_event()
+  }
+  if (event_type == 'treatment_change'){
+    state <- treatment_change_event()
+  }
+  # I cant get the switch to work - stick with the if's for now
+#   switch(event_type,
+#          'weird_first_event' = weird_first_event(),
+#          'mutation_event' = mutation_event(),
+#          'extinction_event' = extinction_event(),
+#          'treatment_change_event' = treatment_change_event())
+  return(state)
+}
