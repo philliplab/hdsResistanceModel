@@ -1,5 +1,7 @@
 export(compute_parameters)
 export(get_de_defaults)
 export(get_scenario)
+export(rootFunc)
 export(scenario)
+export(stateFunc)
 export(toggle_mutation_matrix)
