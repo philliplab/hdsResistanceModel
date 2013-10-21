@@ -7,3 +7,4 @@
 (C) Expand steady state solver to use a root finding function
 (C) Can plot_component be done better? +code_cleanup
 (A) Write some examples into the documentation +documentation
+(A) Write a better description pointing to the article of Welte and ?Shiri?
