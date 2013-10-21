@@ -1,3 +1,7 @@
 (C) ADD type checking to get_de_defaults +input_cleanup
 (B) ADD more checks to scenario +input_cleanup
 (C) ADD more test cases for toggle_mutation_matrix +tests
+(A) refactor eventFunc +refactoring
+(B) Get the switch statement in eventFunc to work +code_cleanup
+(A) tests for the de_system.R functions +tests
+(C) Expand steady state solver to use a root finding function

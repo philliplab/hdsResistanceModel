@@ -18,3 +18,4 @@ Collate:
     'toggle_mutation_matrix.R'
     'compute_parameters.R'
     'de_system.R'
+    'de_system_analysis.R'
