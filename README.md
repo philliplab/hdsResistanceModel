@@ -15,7 +15,7 @@ install_github('hdsResistanceModel', 'philliplab')
 library(hdsResistanceModel)
 ```
 
-The package and all its dependancies should not be installed.
+The package and all its dependancies should now be installed.
 
 ## Basic Examples
 
