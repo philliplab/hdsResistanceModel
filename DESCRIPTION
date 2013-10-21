@@ -16,3 +16,4 @@ Collate:
     'scenario.R'
     'get_scenario.R'
     'toggle_mutation_matrix.R'
+    'compute_parameters.R'

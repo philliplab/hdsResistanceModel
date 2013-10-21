@@ -1,3 +1,4 @@
+export(compute_parameters)
 export(get_de_defaults)
 export(get_scenario)
 export(scenario)
