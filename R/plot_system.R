@@ -7,7 +7,7 @@
 plot_component <- function(plot_vars, component = 'Strain'){
   stopifnot(all(component %in% c('Strain', 'tCells', 'notMutation')))
   stopifnot(length(component) == 1)
-  component_data <- plotVars[grep(component, plotVars[,2]),]
+  component_data <- plot_vars[grep(component, plot_vars[,2]),]
   if (component == 'notMutation'){
     return(
       ggplot(data = component_data,
