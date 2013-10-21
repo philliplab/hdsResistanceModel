@@ -156,3 +156,46 @@ eventFunc <- function(t, y, parms){
 #          'treatment_change_event' = treatment_change_event())
   return(state)
 }
+
+#' Run the whole system
+#' 
+#' Runs the differential equations using the defaults and the scehario
+#' 
+#' @param scenario A list of parameter values specifying the system. As produced by \link{scenario}
+#' @param seed The seed for the randomizer
+#' @export
+
+run_system <- function(scenario, seed){
+  de_defaults <- get_de_defaults()
+  set.seed(seed)
+  
+  params <- compute_parameters(de_defaults, scenario)
+  
+  with(params, {
+    
+    # I need to force the de_system's equations to be executed in the
+    # current environment. This is because of how the event functions
+    # are implemented in deSolve. In order to manipulate the PARAMETERS
+    # of the system, you need to modify them in the parent environment.
+    # They are not returned from the event function, so modifying them
+    # in the parent environment is the only way I could think off to
+    # have the event function manipulate them
+    # In other words, deSolve's parameters functionality needs to be
+    # completely side-stepped and scoping tricks are used instead.
+    environment(stateFunc) <- environment()
+    environment(rootFunc) <- environment()  
+    environment(eventFunc) <- environment()
+    environment(findSteadyState) <- environment()
+    
+    ss <- ode(times = seq(0, timeStop, timeStep),
+              y = findSteadyState(),
+              func = stateFunc,
+              parms = NULL,
+              rootfun = rootFunc,
+              events = list(func = eventFunc, root = TRUE),
+              method = 'lsoda'
+    )
+    ss <- data.frame(ss)
+    return (ss)
+  })
+}

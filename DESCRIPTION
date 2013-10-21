@@ -9,7 +9,9 @@ Depends:
     testthat,
     ggplot2,
     grid,
-    stringr
+    stringr,
+    deSolve,
+    reshape2
 License: GPL-2
 Collate:
     'get_de_defaults.R'
@@ -19,3 +21,5 @@ Collate:
     'compute_parameters.R'
     'de_system.R'
     'de_system_analysis.R'
+    'format_data.R'
+    'plot_system.R'
