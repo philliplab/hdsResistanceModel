@@ -1,7 +1,7 @@
 #' Plots a component of the system
 #' 
 #' @param plot_vars A solved system that has been formatted with \link{format_data}
-#' @param components A character vector that can take on any of the values (Strain, tCells or notMutation)
+#' @param component A character vector that can take on any of the values (Strain, tCells or notMutation)
 #' @export
 
 plot_component <- function(plot_vars, component = 'Strain'){

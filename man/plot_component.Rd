@@ -8,7 +8,7 @@
   \item{plot_vars}{A solved system that has been formatted
   with \link{format_data}}
 
-  \item{components}{A character vector that can take on any
+  \item{component}{A character vector that can take on any
   of the values (Strain, tCells or notMutation)}
 }
 \description{
