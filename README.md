@@ -10,6 +10,8 @@ This is an R project, so within an R session, enter the following commands:
 ```r
 install.packages('devtools') # Install the devtools package for the install_github function
 
+library(devtools)
+
 install_github('hdsResistanceModel', 'philliplab')
 
 library(hdsResistanceModel)
