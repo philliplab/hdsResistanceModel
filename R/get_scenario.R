@@ -1,12 +1,11 @@
-#' Retrieves one of the pre-specified scenario specifications
-#' 
+#' Returns all the pre-specified scenarios
+#'
 #' This function is a poor way of storing pre-specified scenarios. This function is mainly a placeholder
 #' for a mechanism that will store specified scenarios in a DB
 #' 
-#' @param scenario_name The name of the scenario to retrieve
 #' @export
 
-get_scenario <- function(scenario_name){
+get_all_scenarios <- function(){
   userParsLib <- list()
   userParsLib[['Simple_1_2']] <- list(
     timeStep = 1,
@@ -211,13 +210,31 @@ get_scenario <- function(scenario_name){
    Epow = c(0, 1,
             1, 0)
   )
-  
-  
-  
-  
+  return(userParsLib)
+}
+
+#' Retrieves one of the pre-specified scenario specifications
+#' 
+#' This function is a poor way of storing pre-specified scenarios. This function is mainly a placeholder
+#' for a mechanism that will store specified scenarios in a DB
+#' 
+#' @param scenario_name The name of the scenario to retrieve
+#' @export
+
+get_scenario <- function(scenario_name){
+  userParsLib <- get_all_scenarios()
   if (scenario_name %in% names(userParsLib)){
     return(do.call(scenario, userParsLib[[scenario_name]]))
   } else {
     stop("Scenario does not exist")
   }
+}
+
+#' Retrives the names of all the stored scenarios
+#' 
+#' @export
+
+get_scenario_names <- function(){
+  userParsLib <- get_all_scenarios()
+  return(names(userParsLib))
 }
