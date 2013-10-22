@@ -8,3 +8,4 @@
 (C) Can plot_component be done better? +code_cleanup
 (A) Write some examples into the documentation +documentation
 (A) Write a better description pointing to the article of Welte and ?Shiri?
+(B) Fix treatment handling in Pf_steady_state_relationship +code_cleanup
