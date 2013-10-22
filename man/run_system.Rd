@@ -14,4 +14,9 @@
   Runs the differential equations using the defaults and
   the scehario
 }
+\examples{
+ss <- run_system(get_scenario('Simple_1_2'), 1)
+pv <- format_data(ss)
+plot_component(pv, "Strain")
+}
 
