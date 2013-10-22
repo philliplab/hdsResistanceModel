@@ -32,8 +32,11 @@ findSteadyState <- function(){
 #' 
 #' @param Pf The relative fitness of the strain
 #' @param de_defaults The parameters that are unlikely to change from scenario to scenario, as produced by get_de_defaults
-#' @param scenario_parameters The parameters that specify the scenario
+#' @param scenario The parameters that specify the scenario
 #' @export
+#' @examples
+#' Pf_steady_state_relationship(0.95, get_de_defaults(), get_scenario('Simple_1_2'))
+#' # [1]   23368421 8421052632          1
 
 Pf_steady_state_relationship <- function(Pf, de_defaults, scenario){
   scenario$Pf <- Pf
@@ -57,7 +60,7 @@ Pf_steady_state_relationship <- function(Pf, de_defaults, scenario){
 #' 
 #' @param P0s the steady state level(s) of the strain. If length(P0s) > 1, a vector of fitnesses will be returned, one for each steady state level.
 #' @param de_defaults The parameters that are unlikely to change from scenario to scenario, as produced by get_de_defaults
-#' @param scenario_parameters The parameters that specify the scenario
+#' @param scenario The parameters that specify the scenario
 #' @export
 #' 
 #' @examples

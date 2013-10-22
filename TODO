@@ -9,3 +9,4 @@
 (A) Write some examples into the documentation +documentation
 (A) Write a better description pointing to the article of Welte and ?Shiri?
 (B) Fix treatment handling in Pf_steady_state_relationship +code_cleanup
+(A) Carefully test the steady state analysis code +tests
