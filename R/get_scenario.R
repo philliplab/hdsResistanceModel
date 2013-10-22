@@ -7,6 +7,21 @@
 
 get_all_scenarios <- function(){
   userParsLib <- list()
+  userParsLib[['Simple_1_0']] <- list(
+    timeStep = 1,
+    timeStop = 1000,
+    systemName = "Simple_1_0",
+    systemDescription = "One wild type virus with no mutations possible. Primarily used in test cases",
+    Pf = c(0.95), # Fitnesses of the different strains
+    treatments = list(list(t = 0, Te = 0.0, Ts = c(0))),
+    mutationAcceleration = 0.15, # adjustment to make the timescales reasonable
+    Td = 0.2, # Tcell depletion - ratio of pre-infected to post-infected equilibria
+    N_S = 1, # Number of strains in system
+    offStrains = numeric(0), # Strains not present in the initial system
+    stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
+    Epow = c(0)
+  )
+  
   userParsLib[['Simple_1_2']] <- list(
     timeStep = 1,
     timeStop = 1000,
@@ -81,11 +96,11 @@ get_all_scenarios <- function(){
             2,   0)
   )
   
-  userParsLib[['Simple_1_0']] <- list(
+  userParsLib[['Treatment_1_0']] <- list(
    timeStep = 0.5,
    timeStop = 2500,
-   systemName = "Simple_1_0",
-   systemDescription = "One strains that cannot mutate. An attempt to illustrate varying levels of treatment",
+   systemName = "Treatment_1_0",
+   systemDescription = "One strain that cannot mutate. An attempt to illustrate varying levels of treatment",
    Pf = c(0.85), # Fitnesses of the different strains
    treatments = list(list(t=0, Te = 0, Ts = c(0.8)),
                      list(t=500, Te = 0.1, Ts = c(0.8)),
@@ -104,7 +119,7 @@ get_all_scenarios <- function(){
    timeStep = 0.5,
    timeStop = 2500,
    systemName = "BadStart_1_1",
-   systemDescription = "Initial infection with resistent strain. Untreated until wild type pushes resistent strain to very low population levels. Treatment is initiated causing the initial resistence to arise again",
+   systemDescription = "Initial infection with resistant strain. Untreated until wild type pushes resistant strain to very low population levels. Treatment is initiated causing the initial resistance to arise again",
    Pf = c(0.85, 1), # Fitnesses of the different strains
    treatments = list(list(t=0, Te = 0.0, Ts = c(0.8, 0.8)),
                      list(t=1985, Te = 0.3, Ts = c(0, 1))
@@ -122,7 +137,7 @@ get_all_scenarios <- function(){
    timeStep = 0.5,
    timeStop = 3500,
    systemName = "PoorTreat_1_1",
-   systemDescription = "FAILURE: Initial infection with wildType Strain. Resistent mutations occur, but are driven to extinction by dominance of wildType. Poor treatment is initiated allowing drug resistent strain to flourish",
+   systemDescription = "FAILURE: Initial infection with wildType Strain. Resistant mutations occur, but are driven to extinction by dominance of wildType. Poor treatment is initiated allowing drug resistant strain to flourish",
    Pf = c(1, 0.90), # Fitnesses of the different strains
    treatments = list(list(t=0, Te = 0.0, Ts = c(0.8, 0.8)),
                      list(t=1000, Te = 0.18, Ts = c(1,0))
