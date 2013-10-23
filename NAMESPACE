@@ -1,3 +1,4 @@
+export(calc_growth_time)
 export(compute_parameters)
 export(eventFunc)
 export(findSteadyState)

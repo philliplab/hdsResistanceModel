@@ -79,3 +79,43 @@ steady_state_Pf_relationship <- function(P0s, de_defaults, scenario){
   }
   return(solution)
 }
+
+#' Computes the time it takes a strain to grow from a lower threshold to an upper threshold
+#' 
+#' Given a solved system, a strain number and a lower and upper threshold, compute the time it takes
+#' to grow from the one to the other. Returns NA if that growth did not occur in the system. 
+#' 
+#' @param ss A solved system as produced by run_system
+#' @param strain_id The number of strain whose growth rates are of interest
+#' @param lower The lower threshold - the number where the growth that needs to be tracked started
+#' @param upper The upper threshold - the growth is tracked until this threshold is reached
+#' @export
+#' @examples
+#' ss <- run_system(get_scenario('Simple_1_2'),1)
+#' calc_growth_time(ss, 2, 2, 100)
+#' #147
+#' calc_growth_time(ss, 2, 2, 1000)
+#' #235
+#' calc_growth_time(ss, 3, 2, 1000)
+#' #NA
+#' calc_growth_time(ss, 3, 2, 5)
+#' #150
+
+calc_growth_time <- function(ss, strain_id, lower, upper){
+  if(upper <= lower){
+    stop("Lower threshold is above the upper threshold")
+  }
+  strain_pop <- ss[,strain_id+1] # First column is time
+  time <- ss$time
+  suppressWarnings({
+    first_row_over_lower <- min(which(strain_pop > lower))
+    first_row_over_upper <- min(which(strain_pop > upper))
+  })
+  
+  if((first_row_over_lower == Inf)|(first_row_over_lower == Inf)){
+    return (NA)
+  } 
+  
+  time_taken <- time[first_row_over_upper] - time[first_row_over_lower]
+  return(time_taken)
+}

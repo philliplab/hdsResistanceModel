@@ -39,3 +39,11 @@ test_that("the fitness predicted by the analytical steady state solver to realiz
     expect_that(all(abs(ss$X1 - population_level) < (10^-7) * population_level), is_true())
   }
 })
+
+test_that("The calc_growth_times function works", {
+  ss <- run_system(get_scenario('Simple_1_2'), 1)
+  expect_that(calc_growth_time(ss, 2, 2, 100), equals(147))
+  expect_that(calc_growth_time(ss, 2, 2, 1000), equals(235))
+  expect_that(is.na(calc_growth_time(ss, 3, 2, 1000)), is_true())
+  expect_that(calc_growth_time(ss, 3, 2, 5), equals(150))
+})
