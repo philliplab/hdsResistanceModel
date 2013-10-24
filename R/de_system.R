@@ -163,13 +163,14 @@ eventFunc <- function(t, y, parms){
 #' 
 #' @param scenario A list of parameter values specifying the system. As produced by \link{scenario}
 #' @param seed The seed for the randomizer
+#' @param de_defaults A second set of parameters. Values that typically do not change.
 #' @export
 #' @examples
 #' ss <- run_system(get_scenario('Simple_1_2'), 1)
 #' pv <- format_data(ss)
 #' plot_component(pv, "Strain")
 
-run_system <- function(scenario, seed){
+run_system <- function(scenario, seed, de_defaults = get_de_defaults()){
   de_defaults <- get_de_defaults()
   set.seed(seed)
   

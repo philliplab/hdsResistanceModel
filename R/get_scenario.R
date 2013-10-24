@@ -41,6 +41,25 @@ get_all_scenarios <- function(){
              2, 2, 0)
   )
   
+  userParsLib[['AccuTams_1_2']] <- list(
+    timeStep = 1,
+    timeStop = 1500,
+    systemName = "AccuTams_1_2",
+    systemDescription = "One wild strain is present initially. Two other strains can evolve - 2 point mutations to get
+    get one strain and from this strain another 2 point mutations to get to a third possible strain.
+    Strains have increasing fitness.",
+    Pf = c(1,1,1), # Fitnesses of the different strains
+    treatments = list(list(t = 0, Te = 1, Ts = 1-c(0.807442176870748, 0.857971014492754, 0.95))),
+    mutationAcceleration = 1, #1.5*(10^(-1)), # adjustment to make the timescales reasonable
+    Td = 0.2, # Tcell depletion - ratio of pre-infected to post-infected equilibria
+    N_S = 3, # Number of strains in system
+    offStrains = c(2,3), # Strains not present in the initial system
+    stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
+    Epow = c(0, 2, 4,
+             2, 0, 2,
+             4, 2, 0)
+  )
+  
   userParsLib[['Simple_2_1']] <- list(
    timeStep = 0.1,
    timeStop = 1500,
