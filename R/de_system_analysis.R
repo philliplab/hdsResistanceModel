@@ -173,6 +173,27 @@ compute_offThreshold <- function(ss, scenario_spec){
   return (extinction_points)
 }
 
+#' Compute the newStrainLevel
+#'
+#' Mostly for testing
+#'
+#' @param ss A solved system as produced by run_system
+#' @param scenario_spec The specification of the scenario
+#' @export
 
+compute_newStrainLevel <- function(ss, scenario_spec){
+  deathValue <- with(scenario_spec, deathThreshold / deathModifier)
+  strains <- 2:(ncol(ss)-2) # first col time; last col not_mutate; 2nd last col = healthy Tcells
+  new_strain_levels <- NULL
+  for (strain in strains){
+    stepped_strain <- data.frame(no_lag = ss[1:(nrow(ss)-1), strain],
+                                 lagged = ss[2:nrow(ss), strain])
+    new_strain_level <- stepped_strain[(stepped_strain$lagged > 1.1*deathValue) & (abs(stepped_strain$no_lag - deathValue) < 0.0001),]
+    if (nrow(new_strain_level) > 0){
+      new_strain_levels <- c(new_strain_levels, new_strain_level$lagged)
+    }
+  }
+  return (new_strain_levels)
+}
 
 

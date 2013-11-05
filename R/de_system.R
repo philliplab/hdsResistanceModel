@@ -54,7 +54,8 @@ rootFunc <- function(t, y, parms){
   }
   
   # Does a strain go extinct?
-  if (any((state > deathThreshold) & (state < offThreshold))){
+  n_strains <- length(state) - 2
+  if (any((state[1:n_strains] > deathThreshold) & (state[1:n_strains] < offThreshold))){
     return(0)
   } 
   
@@ -79,7 +80,8 @@ eventFunc <- function(t, y, parms){
     if (abs(state[N_S+2]-stochasticEventThreshold) < 0.001){
       event_type <- 'mutation_event'
     }
-    if (any((state > deathThreshold) & (state < offThreshold))){
+    n_strains <- length(state) - 2
+    if (any((state[1:n_strains] > deathThreshold) & (state[1:n_strains] < offThreshold))){
       event_type <- 'extinction_event'
     }
     return(event_type)
@@ -114,7 +116,8 @@ eventFunc <- function(t, y, parms){
   }
   
   extinction_event <- function(){
-    extinctStrain <- which((state > deathThreshold) & (state < offThreshold))
+    n_strains <- length(state) - 2
+    extinctStrain <- which((state[1:n_strains] > deathThreshold) & (state[1:n_strains] < offThreshold))
     state[extinctStrain] <- deathThreshold/deathModifier
     offStrains <<- c(offStrains, extinctStrain)
     mutateCont <<- toggle_mutation_matrix(E, offStrains, type = 'continuous', N_S)

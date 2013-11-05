@@ -40,6 +40,10 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
     numeric_variable_value <- get(numeric_variable)
     if(!is.numeric(numeric_variable_value)) {stop(str_c(numeric_variable, ' is not numeric'))}
   }
+
+  if (deathThreshold > offThreshold) stop("deathThreshold > offThreshold")
+  if (deathThreshold > newStrainLevel) stop("deathThreshold > newStrainLevel")
+  if (offThreshold > newStrainLevel) stop("offThreshold > newStrainLevel")
   
   # check timeStop / timeStep relationship
   if (timeStep > timeStop / 10){stop("timeStep must be < timeStop/10")}
