@@ -14,7 +14,6 @@ Depends:
     reshape2
 License: GPL-2
 Collate:
-    'get_de_defaults.R'
     'scenario.R'
     'get_scenario.R'
     'toggle_mutation_matrix.R'

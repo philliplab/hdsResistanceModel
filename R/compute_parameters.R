@@ -1,16 +1,11 @@
 #' This function transforms the input parameters into a format that the equations can use
 #' 
-#' @param de_defaults The parameters that are unlikely to change from scenario to scenario, 
-#' as produced by get_de_defaults 
 #' @param scenario_parameters The parameters that specify the scenario
 #' @export
 
-compute_parameters <- function(de_defaults, scenario_parameters){
-  params <- de_defaults
-  for (par_name in names(scenario_parameters)){
-    params[[par_name]] <- scenario_parameters[[par_name]]
-  }
-  
+compute_parameters <- function(scenario_parameters){
+  params <- scenario_parameters
+
   new_params <- within(params, {
     N_d <- N_S - length(offStrains)
     Epow <- matrix(Epow, nrow = N_S)

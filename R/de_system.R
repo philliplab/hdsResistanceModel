@@ -134,7 +134,7 @@ eventFunc <- function(t, y, parms){
   }
   
   event_type <- find_event_type(t, state)
-  print (c(t, event_type))
+  #print (c(t, event_type))
   
   if (event_type == 'weird_first_event'){
     state <- state
@@ -159,22 +159,20 @@ eventFunc <- function(t, y, parms){
 
 #' Run the whole system
 #' 
-#' Runs the differential equations using the defaults and the scehario
+#' Runs the differential equations using the scehario specification
 #' 
 #' @param scenario A list of parameter values specifying the system. As produced by \link{scenario}
 #' @param seed The seed for the randomizer
-#' @param de_defaults A second set of parameters. Values that typically do not change.
 #' @export
 #' @examples
 #' ss <- run_system(get_scenario('Simple_1_2'), 1)
 #' pv <- format_data(ss)
 #' plot_component(pv, "Strain")
 
-run_system <- function(scenario, seed, de_defaults = get_de_defaults()){
-  de_defaults <- get_de_defaults()
+run_system <- function(scenario, seed){
   set.seed(seed)
   
-  params <- compute_parameters(de_defaults, scenario)
+  params <- compute_parameters(scenario)
   
   with(params, {
     

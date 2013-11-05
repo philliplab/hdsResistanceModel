@@ -253,12 +253,17 @@ get_all_scenarios <- function(){
 #' for a mechanism that will store specified scenarios in a DB
 #' 
 #' @param scenario_name The name of the scenario to retrieve
+#' @param modified_parameters A list of parameters to change. This will override the values from the stored scenario
 #' @export
 
-get_scenario <- function(scenario_name){
+get_scenario <- function(scenario_name, modified_parameters = list()){
   userParsLib <- get_all_scenarios()
   if (scenario_name %in% names(userParsLib)){
-    return(do.call(scenario, userParsLib[[scenario_name]]))
+    scenarioPars <- userParsLib[[scenario_name]]
+    for (parameter_name in names(modified_parameters)){
+      scenarioPars[[parameter_name]] <- modified_parameters[[parameter_name]]
+    }
+    return(do.call(scenario, scenarioPars))
   } else {
     stop("Scenario does not exist")
   }

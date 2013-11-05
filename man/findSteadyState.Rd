@@ -13,7 +13,7 @@
 }
 \examples{
 simple_1_2 <- get_scenario('Simple_1_2')
-simple_1_2_params <- compute_parameters(get_de_defaults(), simple_1_2)
+simple_1_2_params <- compute_parameters(simple_1_2)
 initial_values <- with(simple_1_2_params,{
   environment(findSteadyState) <- environment()
   findSteadyState()

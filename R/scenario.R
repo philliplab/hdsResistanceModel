@@ -19,7 +19,10 @@
 
 scenario <- function(timeStep, timeStop, systemName, systemDescription, 
                      Pf, treatments, mutationAcceleration, Td, N_S, 
-                     offStrains, stochasticEventThresholdSource, Epow){
+                     offStrains, stochasticEventThresholdSource, Epow,
+                     er = 10^(-4), mu_T = 0.02, mu_P = 0.5, 
+                     S_T = 2 * 10^8, f = 0.37, 
+                     deathThreshold = 0.01, offThreshold = 0.1){
   
   # check that numeric variables are numeric
   numeric_variables <- c("Epow", "mutationAcceleration", "N_S", "offStrains", "Pf", "Td", "timeStep", "timeStop")
@@ -42,6 +45,13 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
     N_S = N_S,
     offStrains = offStrains,
     stochasticEventThresholdSource = stochasticEventThresholdSource,
-    Epow = Epow
+    Epow = Epow,
+    er = er, # general error rate / substitution rate
+    mu_T = mu_T, # Deathrate of healthy cells
+    mu_P = mu_P, # Deathrate of infected cells
+    S_T = S_T, # Tcell replenishment rate
+    f = f, # faithful replication rate
+    deathThreshold = deathThreshold, # switch off dynamics if state variable below this
+    offThreshold = offThreshold # If a strain goes below this, put it in the offStrains
     )
 }

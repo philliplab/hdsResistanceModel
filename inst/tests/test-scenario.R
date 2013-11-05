@@ -20,9 +20,10 @@ scenario_spec <- list(
 test_that("A correct specification yields a correctly formatted list",{
   x <- do.call(scenario, scenario_spec)
   x_names <- sort(names(x))
-  expected_names <- sort(c("Epow", "mutationAcceleration", "N_S", "offStrains", "Pf", 
-                           "stochasticEventThresholdSource", "systemDescription", "systemName", 
-                           "Td", "timeStep", "timeStop", "treatments"))
+  expected_names <- sort(c("deathThreshold", "Epow", "er", "f", "mu_P", "mu_T", "mutationAcceleration", 
+"N_S", "offStrains", "offThreshold", "Pf", "S_T", "stochasticEventThresholdSource", 
+"systemDescription", "systemName", "Td", "timeStep", "timeStop", 
+"treatments"))
   expect_that(x, is_a('list'))
   expect_that(x[['timeStep']], equals(1))
   expect_that(x[['timeStop']], equals(1000))
