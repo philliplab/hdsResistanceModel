@@ -22,7 +22,8 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
                      offStrains, stochasticEventThresholdSource, Epow,
                      er = 10^(-4), mu_T = 0.02, mu_P = 0.5, 
                      S_T = 2 * 10^8, f = 0.37, 
-                     deathThreshold = 0.01, offThreshold = 0.1){
+                     deathThreshold = 0.01, offThreshold = 0.1,
+                     deathModifier = 1.001){
   
   # check that numeric variables are numeric
   numeric_variables <- c("Epow", "mutationAcceleration", "N_S", "offStrains", "Pf", "Td", "timeStep", "timeStop")
@@ -52,6 +53,7 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
     S_T = S_T, # Tcell replenishment rate
     f = f, # faithful replication rate
     deathThreshold = deathThreshold, # switch off dynamics if state variable below this
-    offThreshold = offThreshold # If a strain goes below this, put it in the offStrains
+    offThreshold = offThreshold, # If a strain goes below this, put it in the offStrains
+    deathModifier = deathModifier # A strain is set to deathThreshold / deathModifier when it is extinct
     )
 }

@@ -115,7 +115,7 @@ eventFunc <- function(t, y, parms){
   
   extinction_event <- function(){
     extinctStrain <- which((state > deathThreshold) & (state < offThreshold))
-    state[extinctStrain] <- deathThreshold/1.001
+    state[extinctStrain] <- deathThreshold/deathModifier
     offStrains <<- c(offStrains, extinctStrain)
     mutateCont <<- toggle_mutation_matrix(E, offStrains, type = 'continuous', N_S)
     mutateDisc <<- toggle_mutation_matrix(E, offStrains, type = 'discrete', N_S)

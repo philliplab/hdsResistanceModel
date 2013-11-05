@@ -7,7 +7,8 @@
     mutationAcceleration, Td, N_S, offStrains,
     stochasticEventThresholdSource, Epow, er = 10^(-4),
     mu_T = 0.02, mu_P = 0.5, S_T = 2 * 10^8, f = 0.37,
-    deathThreshold = 0.01, offThreshold = 0.1)
+    deathThreshold = 0.01, offThreshold = 0.1,
+    deathModifier = 1.001)
 }
 \arguments{
   \item{timeStep}{The size of the steps in the output data}
