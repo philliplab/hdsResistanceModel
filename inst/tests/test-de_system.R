@@ -24,7 +24,6 @@ test_that('the deathThreshold can be changed',{
   ss <- run_system(scenario_spec, 1)
   stable_pops <- compute_stable_populations(ss, compari = 5)
   expect_that(names(stable_pops[[3]]), equals("1e-04"))
-
 })
 
 test_that('the deathModifier can be changed', {

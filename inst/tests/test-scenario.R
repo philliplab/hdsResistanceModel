@@ -24,7 +24,7 @@ test_that("A correct specification yields a correctly formatted list",{
                            "mu_T", "mutationAcceleration", "N_S", "offStrains", 
                            "offThreshold", "Pf", "S_T", "stochasticEventThresholdSource",
                            "systemDescription", "systemName", "Td", "timeStep", "timeStop", 
-                           "treatments"))
+                           "treatments", "newStrainLevel"))
   expect_that(x, is_a('list'))
   expect_that(x[['timeStep']], equals(1))
   expect_that(x[['timeStop']], equals(1000))

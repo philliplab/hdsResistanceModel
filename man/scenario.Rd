@@ -8,7 +8,7 @@
     stochasticEventThresholdSource, Epow, er = 10^(-4),
     mu_T = 0.02, mu_P = 0.5, S_T = 2 * 10^8, f = 0.37,
     deathThreshold = 0.01, offThreshold = 0.1,
-    deathModifier = 1.001)
+    deathModifier = 1.001, newStrainLevel = 1)
 }
 \arguments{
   \item{timeStep}{The size of the steps in the output data}
@@ -68,6 +68,10 @@
 
   \item{deathModifier}{When a strain is made extinct, it is
   population is set to deathThreshold / deathModifier}
+
+  \item{newStrainLevel}{When a strain arises from a
+  mutation, its initial population will be set to this
+  value}
 }
 \description{
   The main goal of this function is to perform sanity

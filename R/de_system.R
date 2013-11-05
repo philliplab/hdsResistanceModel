@@ -108,7 +108,7 @@ eventFunc <- function(t, y, parms){
     stochasticEventThreshold <<- stochasticEventThresholdSource()
     
     # update and return the state variables with the new strain present
-    state[newStrain] <- 1 # init the new strain
+    state[newStrain] <- newStrainLevel # init the new strain
     state[N_S+2] <- 1 # reset the mutation counter
     return(state)
   }
