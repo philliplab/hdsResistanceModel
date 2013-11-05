@@ -149,3 +149,30 @@ compute_stable_populations <- function(ss, strains = 'all', timeAfter = 0, timeB
   }
   return(stable_values)
 }
+
+#' Compute the approximate offThreshold - the value below which strains are set to extinct
+#'
+#' Mostly for testing
+#'
+#' @param ss A solved system as produced by run_system
+#' @param scenario_spec The specification of the scenario
+#' @export
+
+compute_offThreshold <- function(ss, scenario_spec){
+  deathValue <- with(scenario_spec, deathThreshold / deathModifier)
+  strains <- 2:(ncol(ss)-2) # first col time; last col not_mutate; 2nd last col = healthy Tcells
+  extinction_points <- NULL
+  for (strain in strains){
+    stepped_strain <- data.frame(no_lag = ss[1:(nrow(ss)-1), strain],
+                                 lagged = ss[2:nrow(ss), strain])
+    extinction <- stepped_strain[(stepped_strain$no_lag > deathValue) & (abs(stepped_strain$lagged - deathValue) < 0.0001),]
+    if (nrow(extinction) > 0){
+      extinction_points <- c(extinction_points, extinction$no_lag)
+    }
+  }
+  return (extinction_points)
+}
+
+
+
+
