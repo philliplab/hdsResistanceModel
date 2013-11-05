@@ -27,8 +27,9 @@
 #' @export
 
 scenario <- function(timeStep, timeStop, systemName, systemDescription, 
-                     Pf, treatments, mutationAcceleration, Td, N_S, 
+                     Pf, treatments, N_S, 
                      offStrains, stochasticEventThresholdSource, Epow,
+                     mutationAcceleration = 1, Td = 0.5,
                      er = 10^(-4), mu_T = 0.02, mu_P = 0.5, 
                      S_T = 2 * 10^8, f = 0.37, 
                      deathThreshold = 0.01, offThreshold = 0.1,

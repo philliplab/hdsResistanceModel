@@ -244,6 +244,60 @@ get_all_scenarios <- function(){
    Epow = c(0, 1,
             1, 0)
   )
+
+  userParsLib[['Treat_no_Resist']] <- list(
+   timeStep = 1,
+   timeStop = 500,
+   systemName = "Treat_no_Resist",
+   systemDescription = "Under good treatment no resistance arises",
+   Pf = c(1, 0.9), # Fitnesses of the different strains
+   treatments = list(list(t=0, Te = 1, Ts = c(0.499996621598795, 0))
+                     ),
+   N_S = 2, # Number of strains in system
+   offStrains = c(2), # Strains not present in the initial system
+   stochasticEventThresholdSource = function(){runif(1)}, # draw this number randomly in production situation
+   Epow = c(0, 3,
+            3, 0),
+   S_T = 7 * 10^10,
+   offThreshold = 0.7
+  )
+
+  userParsLib[['no_Treat_no_Resist']] <- list(
+   timeStep = 1,
+   timeStop = 500,
+   systemName = "no_Treat_no_Resist",
+   systemDescription = "Under no treatment no resistance arises",
+   Pf = c(1, 0.9), # Fitnesses of the different strains
+   treatments = list(list(t=0, Te = 0, Ts = c(0.499996621598795, 0))
+                     ),
+   N_S = 2, # Number of strains in system
+   offStrains = c(2), # Strains not present in the initial system
+   stochasticEventThresholdSource = function(){runif(1)}, # draw this number randomly in production situation
+   Epow = c(0, 3,
+            3, 0),
+   S_T = 7 * 10^10,
+   offThreshold = 0.7
+  )
+
+  userParsLib[['poor_Treat_then_Resist']] <- list(
+   timeStep = 1,
+   timeStop = 500,
+   systemName = "poor_Treat_then_Resist",
+   systemDescription = "Under poor treatment resistance arises",
+   Pf = c(1, 0.9), # Fitnesses of the different strains
+   treatments = list(list(t=0, Te = 0.9, Ts = c(0.499996621598795, 0))
+                     ),
+   N_S = 2, # Number of strains in system
+   offStrains = c(2), # Strains not present in the initial system
+   stochasticEventThresholdSource = function(){runif(1)}, # draw this number randomly in production situation
+   Epow = c(0, 3,
+            3, 0),
+   S_T = 7 * 10^10,
+   offThreshold = 0.7
+  )
+
+
+
   return(userParsLib)
 }
 
