@@ -47,6 +47,27 @@
   occurred}
 
   \item{Epow}{The mutation matrix.}
+
+  \item{er}{The error rate when transcription occurs}
+
+  \item{mu_T}{The death rate for healthy T Cells}
+
+  \item{mu_P}{The death rate of infected T Cells}
+
+  \item{S_T}{The replenishment rate of T Cells}
+
+  \item{f}{The faithful transcription probability for a
+  single virus replication}
+
+  \item{deathThreshold}{Any strain with a population below
+  this will be treated as extinct}
+
+  \item{offThreshold}{Any strain that decreases below this
+  level will be made extinct (by triggering an event) in
+  the next time step.}
+
+  \item{deathModifier}{When a strain is made extinct, it is
+  population is set to deathThreshold / deathModifier}
 }
 \description{
   The main goal of this function is to perform sanity

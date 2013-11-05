@@ -15,6 +15,14 @@
 #' @param offStrains Strains not present in the initial system
 #' @param stochasticEventThresholdSource A function that returns the threshold used to determine if a mutation occurred
 #' @param Epow The mutation matrix.
+#' @param er The error rate when transcription occurs
+#' @param mu_T The death rate for healthy T Cells
+#' @param mu_P The death rate of infected T Cells
+#' @param S_T The replenishment rate of T Cells
+#' @param f The faithful transcription probability for a single virus replication
+#' @param deathThreshold Any strain with a population below this will be treated as extinct
+#' @param offThreshold Any strain that decreases below this level will be made extinct (by triggering an event) in the next time step.
+#' @param deathModifier When a strain is made extinct, it is population is set to deathThreshold / deathModifier
 #' @export
 
 scenario <- function(timeStep, timeStop, systemName, systemDescription, 
