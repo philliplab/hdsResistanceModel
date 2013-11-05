@@ -47,3 +47,17 @@ test_that("The calc_growth_times function works", {
   expect_that(is.na(calc_growth_time(ss, 3, 2, 1000)), is_true())
   expect_that(calc_growth_time(ss, 3, 2, 5), equals(150))
 })
+
+test_that("The compute_stable_populations function works", {
+  ss <- run_system(get_scenario('AccuTams_1_2'),1)
+  stable_pops <- compute_stable_populations(ss, compari = 5)
+  expect_that(names(stable_pops), equals(c("Strain 1", "Strain 2", "Strain 3")))
+  expect_that(names(stable_pops[[1]]), equals(c("0.00999", "1364112.76053", "1364112.76054")))
+
+  stable_pops <- compute_stable_populations(ss, compari = 6)
+  expect_that(names(stable_pops), equals(c("Strain 1", "Strain 2", "Strain 3")))
+  expect_that(names(stable_pops[[1]]), equals(c("0.00999")))
+})
+
+
+

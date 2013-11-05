@@ -117,3 +117,35 @@ calc_growth_time <- function(ss, strain_id, lower, upper){
   time_taken <- time[first_row_over_upper] - time[first_row_over_lower]
   return(time_taken)
 }
+
+#' Computes the stable populations that exists in a solved system
+#'
+#' Mostly for testing purposes
+#'
+#' @param ss A solved system as produced by run_system
+#' @param strains A vector of the strain numbers to use in the computation. Can also be 'all' in which case all strains will be used. Strains are labelled from 1 to n.
+#' @param timeAfter Only time points after the value for this variable will be used.
+#' @param timeBefore If it is greater than 0, then only time points before this value will be used.
+#' @param comparison_magnitude If two subsequent values of the state variables are within 10^-comparison_magnitude of each other, they will be seen as equal.
+#' @export
+
+compute_stable_populations <- function(ss, strains = 'all', timeAfter = 0, timeBefore = 0,
+                                       comparison_magnitude = 4){
+  if (timeBefore > 0){
+    ss <- ss[ss$time < timeBefore,]
+  }
+  ss <- ss[ss$time > timeAfter,]
+  if (strains == 'all'){
+    strains <- 1:(ncol(ss)-3) # first col time; last col not_mutate; 2nd last col = healthy Tcells
+  }
+  strains <- strains + 1
+  nrows <- nrow(ss)
+  stable_values <- list()
+  for (strain in strains){
+    derivative <- ss[1:(nrows-1), strain] - ss[2:nrows, strain]
+    zero_derivatives <- ss[which(abs(derivative) < 10^(-comparison_magnitude)), strain]
+    stable_pops <- table(round(zero_derivatives, comparison_magnitude))
+    stable_values[[str_c('Strain ', strain-1)]] <- stable_pops
+  }
+  return(stable_values)
+}

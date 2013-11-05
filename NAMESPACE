@@ -1,6 +1,7 @@
 export(Pf_steady_state_relationship)
 export(calc_growth_time)
 export(compute_parameters)
+export(compute_stable_populations)
 export(eventFunc)
 export(findSteadyState)
 export(format_data)
