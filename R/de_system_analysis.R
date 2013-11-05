@@ -17,7 +17,7 @@
 findSteadyState <- function(){
   P <- ((S_T * f) / (mu_P)) - (mu_T / k)
   P <- P/(N_S - length(offStrains))
-  P[offStrains] <- deathThreshold/1.001
+  P[offStrains] <- deathThreshold/deathModifier
   Tc <- mu_P / (f * k[1])
   LAMBDA <- 1
   initVec <- c(P, Tc, LAMBDA)
