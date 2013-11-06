@@ -13,6 +13,9 @@
 #' E_ij = 2 of two mutations are required to mutate from strain i to j and so forth. E_ij = E_ji since
 #' mutating from strain i to j requires the same number of mutations as mutating from strain j to i.
 #' Infinite values are allow to indicate impossible mutations
+#'
+#' mutationAcceleration and Td will both be retired. Setting them away from default values will cause
+#' warnings.
 #' 
 #' @param timeStep The size of the steps in the output data
 #' @param timeStop Run the system until this time
@@ -64,6 +67,9 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
   x <- Epow[Epow != Inf]
   if (!all(x == as.integer(x))) stop("Non-integer entries in mutation matrix")
   rm(x)
+
+  if (mutationAcceleration != 1) warning("It is strongly recommended that mutationAcceleration be set to 1")
+  if (Td != 0.5) warning("It is strongly recommended that Td be set to 0.5")
   
   # check timeStop / timeStep relationship
   if (timeStep > timeStop / 10){stop("timeStep must be < timeStop/10")}

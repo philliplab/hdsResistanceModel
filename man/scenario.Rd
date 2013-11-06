@@ -98,5 +98,8 @@
   same number of mutations as mutating from strain j to i.
   Infinite values are allow to indicate impossible
   mutations
+
+  mutationAcceleration and Td will both be retired. Setting
+  them away from default values will cause warnings.
 }
 
