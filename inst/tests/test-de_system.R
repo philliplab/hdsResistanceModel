@@ -1,5 +1,20 @@
 context('de_system')
 
+test_that('run_system produces the same results as in the past (matches stored datasets)', {
+  data(ss_tc_Simple_1_0_s4)
+  ss <- run_system(get_scenario('tc_Simple_1_0'),4)
+  expect_that(ss_tc_Simple_1_0_s4, equals(ss))
+
+  data(ss_tc_Simple_1_2_s4)
+  ss <- run_system(get_scenario('tc_Simple_1_2'),4)
+  expect_that(ss_tc_Simple_1_2_s4, equals(ss))
+
+  data(ss_tc_AccuTams_1_2_s4)
+  ss <- run_system(get_scenario('tc_AccuTams_1_2'),4)
+  expect_that(ss_tc_AccuTams_1_2_s4, equals(ss))
+
+})
+
 test_that('a base case system runs and produces a solved system with the expected properties',{
   scenario_spec <- get_scenario('tc_AccuTams_1_2')
   ss <- run_system(scenario_spec, 1)
