@@ -14,7 +14,7 @@
   in the system 2) There is no treatment
 }
 \examples{
-Pf_steady_state_relationship(0.95, get_scenario('Simple_1_2'))
+Pf_steady_state_relationship(0.95, get_scenario('tc_Simple_1_2'))
 # [1]   23368421 8421052632          1
 }
 

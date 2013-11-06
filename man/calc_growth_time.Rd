@@ -23,7 +23,7 @@
   occur in the system.
 }
 \examples{
-ss <- run_system(get_scenario('Simple_1_2'),1)
+ss <- run_system(get_scenario('tc_Simple_1_2'),1)
 calc_growth_time(ss, 2, 2, 100)
 #147
 calc_growth_time(ss, 2, 2, 1000)

@@ -168,7 +168,7 @@ eventFunc <- function(t, y, parms){
 #' @param seed The seed for the randomizer
 #' @export
 #' @examples
-#' ss <- run_system(get_scenario('Simple_1_2'), 1)
+#' ss <- run_system(get_scenario('tc_Simple_1_2'), 1)
 #' pv <- format_data(ss)
 #' plot_component(pv, "Strain")
 

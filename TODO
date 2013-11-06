@@ -1,4 +1,3 @@
-(C) ADD type checking to get_de_defaults +input_cleanup
 (B) ADD more checks to scenario +input_cleanup
 (C) ADD more test cases for toggle_mutation_matrix +tests
 (A) refactor eventFunc +refactoring

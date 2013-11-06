@@ -16,9 +16,9 @@
   in the system 2) There is no treatment
 }
 \examples{
-as.character(steady_state_Pf_relationship(1000, get_scenario('Simple_1_2')))
+as.character(steady_state_Pf_relationship(1000, get_scenario('tc_Simple_1_2')))
 # [1] "0.800005405441929"
 
-plot(steady_state_Pf_relationship(seq(100000, 10000000, 100000), get_scenario('Simple_1_2')))
+plot(steady_state_Pf_relationship(seq(100000, 10000000, 100000), get_scenario('tc_Simple_1_2')))
 }
 

@@ -5,7 +5,7 @@
 #' @export
 #' @return A vector with the state variable in the steady state
 #' @examples
-#' simple_1_2 <- get_scenario('Simple_1_2')
+#' simple_1_2 <- get_scenario('tc_Simple_1_2')
 #' simple_1_2_params <- compute_parameters(simple_1_2)
 #' initial_values <- with(simple_1_2_params,{
 #'   environment(findSteadyState) <- environment()
@@ -34,7 +34,7 @@ findSteadyState <- function(){
 #' @param scenario The parameters that specify the scenario
 #' @export
 #' @examples
-#' Pf_steady_state_relationship(0.95, get_scenario('Simple_1_2'))
+#' Pf_steady_state_relationship(0.95, get_scenario('tc_Simple_1_2'))
 #' # [1]   23368421 8421052632          1
 
 Pf_steady_state_relationship <- function(Pf, scenario){
@@ -62,10 +62,10 @@ Pf_steady_state_relationship <- function(Pf, scenario){
 #' @export
 #' 
 #' @examples
-#' as.character(steady_state_Pf_relationship(1000, get_scenario('Simple_1_2')))
+#' as.character(steady_state_Pf_relationship(1000, get_scenario('tc_Simple_1_2')))
 #' # [1] "0.800005405441929"
 #' 
-#' plot(steady_state_Pf_relationship(seq(100000, 10000000, 100000), get_scenario('Simple_1_2')))
+#' plot(steady_state_Pf_relationship(seq(100000, 10000000, 100000), get_scenario('tc_Simple_1_2')))
 
 steady_state_Pf_relationship <- function(P0s, scenario){
   solution <- numeric(0)
@@ -89,7 +89,7 @@ steady_state_Pf_relationship <- function(P0s, scenario){
 #' @param upper The upper threshold - the growth is tracked until this threshold is reached
 #' @export
 #' @examples
-#' ss <- run_system(get_scenario('Simple_1_2'),1)
+#' ss <- run_system(get_scenario('tc_Simple_1_2'),1)
 #' calc_growth_time(ss, 2, 2, 100)
 #' #147
 #' calc_growth_time(ss, 2, 2, 1000)

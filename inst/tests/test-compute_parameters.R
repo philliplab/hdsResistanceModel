@@ -1,10 +1,10 @@
 context("compute_parameters")
 
 test_that("the compute_parameters function matches precomputed values",{
-  scenario_parameters <- get_scenario('AccuTams_1_2')
+  scenario_parameters <- get_scenario('tc_AccuTams_1_2')
   set.seed(1)
   params <- compute_parameters(scenario_parameters)
-  expected_params <- list(timeStep = 1, timeStop = 1500, systemName = "AccuTams_1_2", 
+  expected_params <- list(timeStep = 1, timeStop = 1500, systemName = "tc_AccuTams_1_2", 
     systemDescription = "One wild strain is present initially. Two other strains can evolve - 2 point mutations to get\n    get one strain and from this strain another 2 point mutations to get to a third possible strain.\n    Strains have increasing fitness.", 
     Pf = c(1, 1, 1), treatments = list(), mutationAcceleration = 1, 
     Td = 0.2, N_S = 3, offStrains = c(2, 3), stochasticEventThresholdSource = function () 
@@ -25,9 +25,7 @@ test_that("the compute_parameters function matches precomputed values",{
 })
 
 test_that("the compute_parameters function does not fail some sanity checks on many test scenarios", {
-  scenario_names <- c('Simple_1_2', 'Simple_2_1', 'Simple_2_2', 'RepRes_1_1', 'Simple_1_0', 
-                      'BadStart_1_1', 'PoorTreat_1_1', 'AccuRes_1_2', 'AccuTams_1_4', 
-                      'AccuTams_1_3', 'Systematic_Buildup')
+  scenario_names <- c('tc_Simple_1_2', 'tc_Simple_1_0', 'tc_AccuTams_1_2')
   
   
   for (scenario_name in scenario_names){

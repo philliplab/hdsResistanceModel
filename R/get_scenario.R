@@ -7,10 +7,10 @@
 
 get_all_scenarios <- function(){
   userParsLib <- list()
-  userParsLib[['Simple_1_0']] <- list(
+  userParsLib[['tc_Simple_1_0']] <- list(
     timeStep = 1,
     timeStop = 1000,
-    systemName = "Simple_1_0",
+    systemName = "tc_Simple_1_0",
     systemDescription = "One wild type virus with no mutations possible. Primarily used in test cases",
     Pf = c(0.95), # Fitnesses of the different strains
     treatments = list(list(t = 0, Te = 0.0, Ts = c(0))),
@@ -22,10 +22,10 @@ get_all_scenarios <- function(){
     Epow = c(0)
   )
   
-  userParsLib[['Simple_1_2']] <- list(
+  userParsLib[['tc_Simple_1_2']] <- list(
     timeStep = 1,
     timeStop = 1000,
-    systemName = "Simple_1_2",
+    systemName = "tc_Simple_1_2",
     systemDescription = "One wild type virus that can stochastically mutate into 2 target strains. 
   This allows for 2 different stochastic events and 2 different 'paths' through the system. 
   No treatment effect but strain 2 is more fit than strain 1",
@@ -41,10 +41,10 @@ get_all_scenarios <- function(){
              2, 2, 0)
   )
   
-  userParsLib[['AccuTams_1_2']] <- list(
+  userParsLib[['tc_AccuTams_1_2']] <- list(
     timeStep = 1,
     timeStop = 1500,
-    systemName = "AccuTams_1_2",
+    systemName = "tc_AccuTams_1_2",
     systemDescription = "One wild strain is present initially. Two other strains can evolve - 2 point mutations to get
     get one strain and from this strain another 2 point mutations to get to a third possible strain.
     Strains have increasing fitness.",
@@ -295,8 +295,6 @@ get_all_scenarios <- function(){
    S_T = 7 * 10^10,
    offThreshold = 0.7
   )
-
-
 
   return(userParsLib)
 }
