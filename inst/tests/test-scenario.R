@@ -42,7 +42,10 @@ test_that("A correct specification yields a correctly formatted list",{
 })
 
 test_that("An incorrect specification throws an error",{
-  numeric_variables <- c("Epow", "mutationAcceleration", "N_S", "offStrains", "Pf", "Td", "timeStep", "timeStop")
+  numeric_variables <- c("Epow", "mutationAcceleration", "N_S", "offStrains", 
+                         "Pf", "Td", "timeStep", "timeStop", "er", "mu_T",
+                         "mu_P", "S_T", "f", "deathThreshold", "offThreshold",
+                         "deathModifier", "newStrainLevel")
   for (var_name in numeric_variables){
     nonnumeric_variable <- scenario_spec
     nonnumeric_variable[[var_name]] <- "Hello"

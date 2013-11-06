@@ -36,7 +36,10 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
                      deathModifier = 1.001, newStrainLevel = 1){
   
   # check that numeric variables are numeric
-  numeric_variables <- c("Epow", "mutationAcceleration", "N_S", "offStrains", "Pf", "Td", "timeStep", "timeStop")
+  numeric_variables <- c("Epow", "mutationAcceleration", "N_S", "offStrains", 
+                         "Pf", "Td", "timeStep", "timeStop", "er", "mu_T",
+                         "mu_P", "S_T", "f", "deathThreshold", "offThreshold",
+                         "deathModifier", "newStrainLevel")
   for (numeric_variable in numeric_variables){
     numeric_variable_value <- get(numeric_variable)
     if(!is.numeric(numeric_variable_value)) {stop(str_c(numeric_variable, ' is not numeric'))}
