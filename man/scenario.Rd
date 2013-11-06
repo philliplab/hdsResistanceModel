@@ -19,7 +19,7 @@
 
   \item{systemDescription}{A description for the system}
 
-  \item{Pf}{Fitnesses of the different strains}
+  \item{Pf}{Fitnesses of the different strains.}
 
   \item{treatments}{The treatment specification. A list of
   lists. Each inner list is the details of a single
@@ -73,9 +73,30 @@
   mutation, its initial population will be set to this
   value}
 }
+\value{
+  A list with validated parameter settings
+}
 \description{
   The main goal of this function is to perform sanity
   checks on a scenario specification and to provide
-  documentation for the input parametes
+  documentation for the input parameters
+}
+\details{
+  When the effective invasion rates are computed Pf*(1 -
+  Ts*Te), then the invasion rates must be greater than Td
+  and smaller than 1. Where Ts is the treatment
+  suceptibility and Te is the treatment effect
+
+  The Epow mutation matrix contains the number of mutation
+  event that must occur to mutate from one strain to
+  another. Epow = [ E_ij ]. E_ii = 0 since no mutation is
+  required if the exact same strain is replicated. E_ij = 1
+  if a single mutation is required to mutate from strain i
+  to strain j. Likewise E_ij = 2 of two mutations are
+  required to mutate from strain i to j and so forth. E_ij
+  = E_ji since mutating from strain i to j requires the
+  same number of mutations as mutating from strain j to i.
+  Infinite values are allow to indicate impossible
+  mutations
 }
 

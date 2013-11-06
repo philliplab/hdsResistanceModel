@@ -1,13 +1,24 @@
 #' Checks input list for problems and throw an error or returns a valid scenario specification
 #' 
 #' The main goal of this function is to perform sanity checks on a scenario specification and to provide
-#' documentation for the input parametes
+#' documentation for the input parameters
+#'
+#' When the effective invasion rates are computed Pf*(1 - Ts*Te), then the invasion rates must
+#' be greater than Td and smaller than 1.
+#' Where Ts is the treatment suceptibility and Te is the treatment effect
+#' 
+#' The Epow mutation matrix contains the number of mutation event that must occur to mutate from
+#' one strain to another. Epow = [ E_ij ]. E_ii = 0 since no mutation is required if the exact same strain
+#' is replicated. E_ij = 1 if a single mutation is required to mutate from strain i to strain j. Likewise
+#' E_ij = 2 of two mutations are required to mutate from strain i to j and so forth. E_ij = E_ji since
+#' mutating from strain i to j requires the same number of mutations as mutating from strain j to i.
+#' Infinite values are allow to indicate impossible mutations
 #' 
 #' @param timeStep The size of the steps in the output data
 #' @param timeStop Run the system until this time
 #' @param systemName A name for the system
 #' @param systemDescription A description for the system
-#' @param Pf Fitnesses of the different strains
+#' @param Pf Fitnesses of the different strains.
 #' @param treatments The treatment specification. A list of lists. Each inner list is the details of a single treatment regine. When did it start (t), What is its effect (Te) and how suceptible is each strain to this treatment? (Ts) (vector with susceptibility for each strain). The outer list loops over each regime change.
 #' @param mutationAcceleration A factor that accellerates the rate of mutaton. Needed to get the timescales for when mutations arises right
 #' @param Td Tcell depletion - ratio of pre-infected to post-infected equilibria. It also sets the scale for the acceptible range of the relative fitnesses of the strains.
@@ -24,6 +35,7 @@
 #' @param offThreshold Any strain that decreases below this level will be made extinct (by triggering an event) in the next time step.
 #' @param deathModifier When a strain is made extinct, it is population is set to deathThreshold / deathModifier
 #' @param newStrainLevel When a strain arises from a mutation, its initial population will be set to this value
+#' @return A list with validated parameter settings
 #' @export
 
 scenario <- function(timeStep, timeStop, systemName, systemDescription, 
@@ -48,6 +60,10 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
   if (deathThreshold > offThreshold) stop("deathThreshold > offThreshold")
   if (deathThreshold > newStrainLevel) stop("deathThreshold > newStrainLevel")
   if (offThreshold > newStrainLevel) stop("offThreshold > newStrainLevel")
+
+  x <- Epow[Epow != Inf]
+  if (!all(x == as.integer(x))) stop("Non-integer entries in mutation matrix")
+  rm(x)
   
   # check timeStop / timeStep relationship
   if (timeStep > timeStop / 10){stop("timeStep must be < timeStop/10")}
