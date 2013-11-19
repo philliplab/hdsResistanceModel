@@ -11,7 +11,9 @@ Depends:
     grid,
     stringr,
     deSolve,
-    reshape2
+    reshape2,
+    shiny,
+    shinyIncubator
 License: GPL-2
 Collate:
     'scenario.R'
@@ -23,3 +25,5 @@ Collate:
     'format_data.R'
     'plot_system.R'
     'dataset_docs.R'
+    'shiny_app.R'
+    'scenario_ui.R'

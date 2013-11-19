@@ -3,7 +3,7 @@
 #' The main goal of this function is to perform sanity checks on a scenario specification and to provide
 #' documentation for the input parameters
 #'
-#' When the effective invasion rates are computed Pf*(1 - Ts*Te), then the invasion rates must
+#' When the effective invasion rates are computed Pf*(1 - Ts*Te), then the effective invasion rates must
 #' be greater than Td and smaller than 1.
 #' Where Ts is the treatment suceptibility and Te is the treatment effect
 #' 
@@ -51,8 +51,8 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
                      deathModifier = 1.001, newStrainLevel = 1){
   
   # check that numeric variables are numeric
-  numeric_variables <- c("Epow", "mutationAcceleration", "N_S", "offStrains", 
-                         "Pf", "Td", "timeStep", "timeStop", "er", "mu_T",
+  numeric_variables <- c("timeStep", "timeStop", "Pf", "N_S", "offStrains", 
+                         "Epow", "mutationAcceleration", "Td", "er", "mu_T",
                          "mu_P", "S_T", "f", "deathThreshold", "offThreshold",
                          "deathModifier", "newStrainLevel")
   for (numeric_variable in numeric_variables){

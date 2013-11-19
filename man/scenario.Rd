@@ -83,8 +83,8 @@
 }
 \details{
   When the effective invasion rates are computed Pf*(1 -
-  Ts*Te), then the invasion rates must be greater than Td
-  and smaller than 1. Where Ts is the treatment
+  Ts*Te), then the effective invasion rates must be greater
+  than Td and smaller than 1. Where Ts is the treatment
   suceptibility and Te is the treatment effect
 
   The Epow mutation matrix contains the number of mutation

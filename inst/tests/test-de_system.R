@@ -12,7 +12,6 @@ test_that('run_system produces the same results as in the past (matches stored d
   data(ss_tc_AccuTams_1_2_s4)
   ss <- run_system(get_scenario('tc_AccuTams_1_2'),4)
   expect_that(ss_tc_AccuTams_1_2_s4, equals(ss))
-
 })
 
 test_that('a base case system runs and produces a solved system with the expected properties',{

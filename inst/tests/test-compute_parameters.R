@@ -27,7 +27,6 @@ test_that("the compute_parameters function matches precomputed values",{
 test_that("the compute_parameters function does not fail some sanity checks on many test scenarios", {
   scenario_names <- c('tc_Simple_1_2', 'tc_Simple_1_0', 'tc_AccuTams_1_2')
   
-  
   for (scenario_name in scenario_names){
     scenario_parameters <- get_scenario(scenario_name)
     for (seed in 1:10){
