@@ -1,26 +1,33 @@
 library(hdsResistanceModel)
- 
-shinyServer(function(input, output) {
-  cur_scenario <- reactive({
+
+shinyServer(function(input, output, session) {
+  selected_scenario <- reactive({
+    x <- get_scenario(input$scenario)
+    updateNumericInput(session, "timeStop", value = x$timeStop)
+    #updateNumericInput(session, "Pf", value = data.frame(as.list(x$Pf)))
+    input$scenario
+  })
+
+  updated_scenario <- reactive({
     mod_pars <- list()
     mod_pars[['timeStop']] <- input$timeStop
-    x <- get_scenario(input$scenario, modified_parameters = mod_pars)
-    print (x)
-    x
+#    if (!is.null(input$Pf)) {mod_pars[['Pf']] <- as.numeric(input$Pf[1,])}
+    x <- get_scenario(selected_scenario(), modified_parameters = mod_pars)
+    return(x)
   })
 
   pv <- reactive({
-    ss <- run_system(cur_scenario(), input$seed)
+    ss <- run_system(updated_scenario(), input$seed)
     pv <- format_data(ss)
     return(pv)
   })
 
   output$scenarioUI <- renderUI({
-    make_scenario_ui(cur_scenario())
+    make_scenario_ui(updated_scenario())
   })
 
   output$pars <- renderPrint({
-      print(cur_scenario())
+      print(updated_scenario())
   })
 
   output$Strain <- renderPlot({
