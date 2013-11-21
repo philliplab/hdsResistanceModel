@@ -5,7 +5,7 @@ shinyUI(pageWithSidebar(
   sidebarPanel(
     selectInput('scenario', 'Scenario', get_scenario_names()),
     numericInput('seed', 'seed', 1),
-#    submitButton(),
+    submitButton(),
     uiOutput('scenarioUI')
   ),
   mainPanel(

@@ -14,8 +14,8 @@ make_scenario_ui <- function(scenario){
   Pf <- scenario$Pf
   names(Pf) <- paste("Strain", 1:scenario$N_S, sep = "_")
   c(
-#    numericInput('timeStep', 'timeStep', scenario$timeStep),
-    numericInput('timeStop', 'timeStop', scenario$timeStop) #,
-#    matrixInput('Pf', 'Pf', data.frame(as.list(Pf)))
+    numericInput('timeStep', 'timeStep', scenario$timeStep),
+    numericInput('timeStop', 'timeStop', scenario$timeStop),
+    matrixInput('Pf', 'Pf', data.frame(as.list(Pf)))
     )
 }

@@ -1,39 +1,42 @@
 library(hdsResistanceModel)
 
-par_value_holder <- list()
-par_value_holder[['timeStop']] <- NULL
+scenario_changed <- FALSE
 
 shinyServer(function(input, output, session) {
  
   selected_scenario <- reactive({
     x <- get_scenario(input$scenario)
+    scenario_changed <<- TRUE
+    updateNumericInput(session, "timeStep", value = x$timeStep)
     updateNumericInput(session, "timeStop", value = x$timeStop)
-    par_value_holder[['timeStop']] <<- x$timeStop
-    #updateNumericInput(session, "Pf", value = data.frame(as.list(x$Pf)))
+    updateNumericInput(session, "Pf", value = data.frame(as.list(x$Pf)))
     print ('---------> SELECTED')
-    print (par_value_holder)
+    print (scenario_changed)
     return(input$scenario)
   })
 
   updated_scenario <- reactive({
     print ('---------> UPDATED - start')
-    print (par_value_holder)
+    print (scenario_changed)
     scenario_name <- selected_scenario()
     mod_pars <- list()
     print ('---------> UPDATED - middle')
-    print (par_value_holder)
-    its <- input$timeStop
-    if (is.null(par_value_holder[['timeStop']])){
-      mod_pars[['timeStop']] <- its
+    print (scenario_changed)
+    input_timeStop <- input$timeStop
+    input_timeStep <- input$timeStep
+    input_Pf <- input$Pf
+    if (!scenario_changed){
+      mod_pars[['timeStop']] <- input_timeStop
+      mod_pars[['timeStep']] <- input_timeStep
+      mod_pars[['Pf']] <- as.numeric(input_Pf[1,])
+      x <- get_scenario(scenario_name, modified_parameters = mod_pars)
     }  else {
-      mod_pars[['timeStop']] <- par_value_holder[['timeStop']]
-      par_value_holder[['timeStop']] <<- NULL
+      x <- get_scenario(scenario_name)
+      scenario_changed <<- FALSE
     }
 
-#    if (!is.null(input$Pf)) {mod_pars[['Pf']] <- as.numeric(input$Pf[1,])}
-    x <- get_scenario(scenario_name, modified_parameters = mod_pars)
     print ('---------> UPDATED - end')
-    print (par_value_holder)
+    print (scenario_changed)
     return(x)
   })
 
