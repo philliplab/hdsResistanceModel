@@ -43,7 +43,8 @@
 
 scenario <- function(timeStep, timeStop, systemName, systemDescription, 
                      kBase, treatments, N_S, 
-                     offStrains, stochasticEventThresholdSource, mutMat,
+                     offStrains, stochasticEventThresholdSource = function(){runif(1)}, 
+                     mutMat = NULL,
                      mutationAcceleration = 1, Td = 0.5,
                      er = 10^(-4), mu_T = 0.02, mu_P = 0.5, 
                      S_T = 2 * 10^8, f = 0.37, 
@@ -64,6 +65,7 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
   if (deathThreshold > newStrainLevel) stop("deathThreshold > newStrainLevel")
   if (offThreshold > newStrainLevel) stop("offThreshold > newStrainLevel")
 
+  if (is.null(mutMat)) stop("mutMat cannot be NULL")
   x <- mutMat[mutMat != Inf]
   if (!all(x == as.integer(x))) stop("Non-integer entries in mutation matrix")
   rm(x)
