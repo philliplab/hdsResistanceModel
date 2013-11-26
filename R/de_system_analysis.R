@@ -42,7 +42,7 @@ Pf_steady_state_relationship <- function(Pf, scenario){
   scenario$treatments <- list(list(t=0, A = 0, Ts = 0))
   scenario$N_S <- 1
   scenario$offStrains <- numeric(0)
-  scenario$Epow <- 0
+  scenario$mutMat <- 0
   params <- compute_parameters(scenario)
   initial_values <- with(params,{
     environment(findSteadyState) <- environment()

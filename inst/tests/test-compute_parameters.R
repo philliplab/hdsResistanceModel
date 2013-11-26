@@ -10,7 +10,7 @@ test_that("the compute_parameters function matches precomputed values",{
     Td = 0.2, N_S = 3, offStrains = c(2, 3), stochasticEventThresholdSource = function () 
     {
         return(runif(1))
-    }, Epow = structure(c(0, 2, 4, 2, 0, 2, 4, 2, 0), .Dim = c(3L, 
+    }, mutMat = structure(c(0, 2, 4, 2, 0, 2, 4, 2, 0), .Dim = c(3L, 
     3L)), er = 1e-04, mu_T = 0.02, mu_P = 0.5, S_T = 2e+08, f = 0.37, 
     deathThreshold = 0.01, offThreshold = 0.1, deathModifier = 1.001, 
     newStrainLevel = 1, mutateDisc = structure(c(0, 3.7e-09, 

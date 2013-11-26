@@ -4,7 +4,7 @@
 \usage{
   scenario(timeStep, timeStop, systemName,
     systemDescription, Pf, treatments, N_S, offStrains,
-    stochasticEventThresholdSource, Epow,
+    stochasticEventThresholdSource, mutMat,
     mutationAcceleration = 1, Td = 0.5, er = 10^(-4),
     mu_T = 0.02, mu_P = 0.5, S_T = 2 * 10^8, f = 0.37,
     deathThreshold = 0.01, offThreshold = 0.1,
@@ -46,7 +46,7 @@
   returns the threshold used to determine if a mutation
   occurred}
 
-  \item{Epow}{The mutation matrix.}
+  \item{mutMat}{The mutation matrix.}
 
   \item{er}{The error rate when transcription occurs}
 
@@ -87,16 +87,16 @@
   than Td and smaller than 1. Where Ts is the treatment
   suceptibility and A is the treatment effect
 
-  The Epow mutation matrix contains the number of mutation
-  event that must occur to mutate from one strain to
-  another. Epow = [ E_ij ]. E_ii = 0 since no mutation is
-  required if the exact same strain is replicated. E_ij = 1
-  if a single mutation is required to mutate from strain i
-  to strain j. Likewise E_ij = 2 of two mutations are
-  required to mutate from strain i to j and so forth. E_ij
-  = E_ji since mutating from strain i to j requires the
-  same number of mutations as mutating from strain j to i.
-  Infinite values are allow to indicate impossible
+  The mutMat mutation matrix contains the number of
+  mutation event that must occur to mutate from one strain
+  to another. mutMat = [ E_ij ]. E_ii = 0 since no mutation
+  is required if the exact same strain is replicated. E_ij
+  = 1 if a single mutation is required to mutate from
+  strain i to strain j. Likewise E_ij = 2 of two mutations
+  are required to mutate from strain i to j and so forth.
+  E_ij = E_ji since mutating from strain i to j requires
+  the same number of mutations as mutating from strain j to
+  i. Infinite values are allow to indicate impossible
   mutations
 
   mutationAcceleration and Td will both be retired. Setting

@@ -12,7 +12,7 @@ scenario_spec <- list(
     N_S = 3,
     offStrains = c(2,3),
     stochasticEventThresholdSource = function(){return(runif(1))},
-    Epow = c(0, 2, 2,
+    mutMat = c(0, 2, 2,
              2, 0, 2,
              2, 2, 0)
   )
@@ -20,7 +20,7 @@ scenario_spec <- list(
 test_that("A correct specification yields a correctly formatted list",{
   x <- do.call(scenario, scenario_spec)
   x_names <- sort(names(x))
-  expected_names <- sort(c("deathModifier", "deathThreshold", "Epow", "er", "f", "mu_P", 
+  expected_names <- sort(c("deathModifier", "deathThreshold", "mutMat", "er", "f", "mu_P", 
                            "mu_T", "mutationAcceleration", "N_S", "offStrains", 
                            "offThreshold", "Pf", "S_T", "stochasticEventThresholdSource",
                            "systemDescription", "systemName", "Td", "timeStep", "timeStop", 
@@ -37,12 +37,12 @@ test_that("A correct specification yields a correctly formatted list",{
   expect_that(x[['N_S']], equals(3))
   expect_that(x[['offStrains']], equals(c(2,3)))
   expect_that(x[['stochasticEventThresholdSource']], equals(function(){return(runif(1))}))
-  expect_that(x[['Epow']], equals(c(0, 2, 2, 2, 0, 2, 2, 2, 0)))
+  expect_that(x[['mutMat']], equals(c(0, 2, 2, 2, 0, 2, 2, 2, 0)))
   expect_that(x_names, equals(expected_names))
 })
 
 test_that("An incorrect specification throws an error",{
-  numeric_variables <- c("Epow", "mutationAcceleration", "N_S", "offStrains", 
+  numeric_variables <- c("mutMat", "mutationAcceleration", "N_S", "offStrains", 
                          "Pf", "Td", "timeStep", "timeStop", "er", "mu_T",
                          "mu_P", "S_T", "f", "deathThreshold", "offThreshold",
                          "deathModifier", "newStrainLevel")

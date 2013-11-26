@@ -7,8 +7,8 @@
 #' be greater than Td and smaller than 1.
 #' Where Ts is the treatment suceptibility and A is the treatment effect
 #' 
-#' The Epow mutation matrix contains the number of mutation event that must occur to mutate from
-#' one strain to another. Epow = [ E_ij ]. E_ii = 0 since no mutation is required if the exact same strain
+#' The mutMat mutation matrix contains the number of mutation event that must occur to mutate from
+#' one strain to another. mutMat = [ E_ij ]. E_ii = 0 since no mutation is required if the exact same strain
 #' is replicated. E_ij = 1 if a single mutation is required to mutate from strain i to strain j. Likewise
 #' E_ij = 2 of two mutations are required to mutate from strain i to j and so forth. E_ij = E_ji since
 #' mutating from strain i to j requires the same number of mutations as mutating from strain j to i.
@@ -28,7 +28,7 @@
 #' @param N_S Number of strains in system
 #' @param offStrains Strains not present in the initial system
 #' @param stochasticEventThresholdSource A function that returns the threshold used to determine if a mutation occurred
-#' @param Epow The mutation matrix.
+#' @param mutMat The mutation matrix.
 #' @param er The error rate when transcription occurs
 #' @param mu_T The death rate for healthy T Cells
 #' @param mu_P The death rate of infected T Cells
@@ -43,7 +43,7 @@
 
 scenario <- function(timeStep, timeStop, systemName, systemDescription, 
                      Pf, treatments, N_S, 
-                     offStrains, stochasticEventThresholdSource, Epow,
+                     offStrains, stochasticEventThresholdSource, mutMat,
                      mutationAcceleration = 1, Td = 0.5,
                      er = 10^(-4), mu_T = 0.02, mu_P = 0.5, 
                      S_T = 2 * 10^8, f = 0.37, 
@@ -52,7 +52,7 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
   
   # check that numeric variables are numeric
   numeric_variables <- c("timeStep", "timeStop", "Pf", "N_S", "offStrains", 
-                         "Epow", "mutationAcceleration", "Td", "er", "mu_T",
+                         "mutMat", "mutationAcceleration", "Td", "er", "mu_T",
                          "mu_P", "S_T", "f", "deathThreshold", "offThreshold",
                          "deathModifier", "newStrainLevel")
   for (numeric_variable in numeric_variables){
@@ -64,7 +64,7 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
   if (deathThreshold > newStrainLevel) stop("deathThreshold > newStrainLevel")
   if (offThreshold > newStrainLevel) stop("offThreshold > newStrainLevel")
 
-  x <- Epow[Epow != Inf]
+  x <- mutMat[mutMat != Inf]
   if (!all(x == as.integer(x))) stop("Non-integer entries in mutation matrix")
   rm(x)
 
@@ -85,7 +85,7 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
     N_S = N_S,
     offStrains = offStrains,
     stochasticEventThresholdSource = stochasticEventThresholdSource,
-    Epow = Epow,
+    mutMat = mutMat,
     er = er, # general error rate / substitution rate
     mu_T = mu_T, # Deathrate of healthy cells
     mu_P = mu_P, # Deathrate of infected cells

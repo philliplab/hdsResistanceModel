@@ -19,7 +19,7 @@ get_all_scenarios <- function(){
     N_S = 1, # Number of strains in system
     offStrains = numeric(0), # Strains not present in the initial system
     stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
-    Epow = c(0)
+    mutMat = c(0)
   )
   
   userParsLib[['tc_Simple_1_2']] <- list(
@@ -36,7 +36,7 @@ get_all_scenarios <- function(){
     N_S = 3, # Number of strains in system
     offStrains = c(2,3), # Strains not present in the initial system
     stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
-    Epow = c(0, 2, 2,
+    mutMat = c(0, 2, 2,
              2, 0, 2,
              2, 2, 0)
   )
@@ -54,7 +54,7 @@ get_all_scenarios <- function(){
     N_S = 3, # Number of strains in system
     offStrains = c(2,3), # Strains not present in the initial system
     stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
-    Epow = c(0, 2, 4,
+    mutMat = c(0, 2, 4,
              2, 0, 2,
              4, 2, 0)
   )
@@ -71,7 +71,7 @@ get_all_scenarios <- function(){
     N_S = 3, # Number of strains in system
     offStrains = c(2,3), # Strains not present in the initial system
     stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
-    Epow = c(0, 2, 5,
+    mutMat = c(0, 2, 5,
              2, 0, 3,
              5, 3, 0),
     offThreshold = 0.7,
@@ -90,7 +90,7 @@ get_all_scenarios <- function(){
     N_S = 3, # Number of strains in system
     offStrains = c(2,3), # Strains not present in the initial system
     stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
-    Epow = c(0, 3, 6,
+    mutMat = c(0, 3, 6,
              3, 0, 3,
              6, 3, 0),
     offThreshold = 0.7,
@@ -110,7 +110,7 @@ get_all_scenarios <- function(){
     N_S = 3, # Number of strains in system
     offStrains = c(2,3), # Strains not present in the initial system
     stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
-    Epow = c(0, 3, 5,
+    mutMat = c(0, 3, 5,
              3, 0, 2,
              5, 2, 0),
     offThreshold = 0.7,
@@ -131,7 +131,7 @@ get_all_scenarios <- function(){
 #   N_S = 3, # Number of strains in system
 #   offStrains = c(3), # Strains not present in the initial system
 #   stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
-#   Epow = c(0, 2, 2,
+#   mutMat = c(0, 2, 2,
 #            2, 0, 2,
 #            2, 2, 0)
 #  )
@@ -150,7 +150,7 @@ get_all_scenarios <- function(){
 #   N_S = 4, # Number of strains in system
 #   offStrains = c(2,4), # Strains not present in the initial system
 #   stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
-#   Epow = c(0,   2,   Inf, Inf,
+#   mutMat = c(0,   2,   Inf, Inf,
 #            2,   0,   Inf, Inf,
 #            Inf, Inf, 0,   2,
 #            Inf, Inf, 2,   0)
@@ -168,7 +168,7 @@ get_all_scenarios <- function(){
 #   N_S = 2, # Number of strains in system
 #   offStrains = c(2), # Strains not present in the initial system
 #   stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
-#   Epow = c(0,   2,
+#   mutMat = c(0,   2,
 #            2,   0)
 #  )
 #  
@@ -188,7 +188,7 @@ get_all_scenarios <- function(){
 #   N_S = 1, # Number of strains in system
 #   offStrains = 0[0], # Strains not present in the initial system
 #   stochasticEventThresholdSource = function(){return (0.4)}, # draw this number randomly in production situation
-#   Epow = c(0)
+#   mutMat = c(0)
 #  )
 #  
 #  userParsLib[['BadStart_1_1']] <- list(
@@ -205,7 +205,7 @@ get_all_scenarios <- function(){
 #   N_S = 2, # Number of strains in system
 #   offStrains = c(2), # Strains not present in the initial system
 #   stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
-#   Epow = c(0,   2,
+#   mutMat = c(0,   2,
 #            2,   0)
 #  )
 #  
@@ -223,7 +223,7 @@ get_all_scenarios <- function(){
 #   N_S = 2, # Number of strains in system
 #   offStrains = c(2), # Strains not present in the initial system
 #   stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
-#   Epow = c(0,   1,
+#   mutMat = c(0,   1,
 #            1,   0)
 #  )
 #  
@@ -241,7 +241,7 @@ get_all_scenarios <- function(){
 #   N_S = 3, # Number of strains in system
 #   offStrains = c(2,3), # Strains not present in the initial system
 #   stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
-#   Epow = c(0,   2,   3,
+#   mutMat = c(0,   2,   3,
 #            2,   0,   1,
 #            3,   1,   0)
 #  )
@@ -259,7 +259,7 @@ get_all_scenarios <- function(){
 #   N_S = 5, # Number of strains in system
 #   offStrains = c(2,3,4,5), # Strains not present in the initial system
 #   stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
-#   Epow = c(0, 1, 2, 3, 4,
+#   mutMat = c(0, 1, 2, 3, 4,
 #            1, 0, 1, 2, 3,
 #            2, 1, 0, 1, 2,
 #            3, 2, 1, 0, 1,
@@ -279,7 +279,7 @@ get_all_scenarios <- function(){
 #   N_S = 4, # Number of strains in system
 #   offStrains = c(2,3,4), # Strains not present in the initial system
 #   stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
-#   Epow = c(0, 1, 2, 3,
+#   mutMat = c(0, 1, 2, 3,
 #            1, 0, 1, 2,
 #            2, 1, 0, 1,
 #            3, 2, 1, 0)
@@ -298,7 +298,7 @@ get_all_scenarios <- function(){
 #   N_S = 2, # Number of strains in system
 #   offStrains = c(2), # Strains not present in the initial system
 #   stochasticEventThresholdSource = function(){runif(1)}, # draw this number randomly in production situation
-#   Epow = c(0, 1,
+#   mutMat = c(0, 1,
 #            1, 0)
 #  )
 
@@ -313,7 +313,7 @@ get_all_scenarios <- function(){
    N_S = 2, # Number of strains in system
    offStrains = c(2), # Strains not present in the initial system
    stochasticEventThresholdSource = function(){runif(1)}, # draw this number randomly in production situation
-   Epow = c(0, 3,
+   mutMat = c(0, 3,
             3, 0),
    S_T = 7 * 10^10,
    offThreshold = 0.7
@@ -330,7 +330,7 @@ get_all_scenarios <- function(){
    N_S = 2, # Number of strains in system
    offStrains = c(2), # Strains not present in the initial system
    stochasticEventThresholdSource = function(){runif(1)}, # draw this number randomly in production situation
-   Epow = c(0, 3,
+   mutMat = c(0, 3,
             3, 0),
    S_T = 7 * 10^10,
    offThreshold = 0.7
@@ -347,7 +347,7 @@ get_all_scenarios <- function(){
    N_S = 2, # Number of strains in system
    offStrains = c(2), # Strains not present in the initial system
    stochasticEventThresholdSource = function(){runif(1)}, # draw this number randomly in production situation
-   Epow = c(0, 3,
+   mutMat = c(0, 3,
             3, 0),
    S_T = 7 * 10^10,
    offThreshold = 0.7
