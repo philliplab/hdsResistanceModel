@@ -6,7 +6,7 @@ scenario_spec <- list(
     systemName = "tc_Simple_1_2",
     systemDescription = "One wild type virus that can stochastically mutate into 2 target strains. This allows for 2 different stochastic events and 2 different 'paths' through the system. No treatment effect but strain 2 is more fit than strain 1",
     Pf = c(0.95, 1, 0.96),
-    treatments = list(list(t = 0, Te = 0.0, Ts = c(0.8, 0.80, 0.75))),
+    treatments = list(list(t = 0, A = 0.0, Ts = c(0.8, 0.80, 0.75))),
     mutationAcceleration = 1.5*(10^(-1)),
     Td = 0.2,
     N_S = 3,
@@ -31,7 +31,7 @@ test_that("A correct specification yields a correctly formatted list",{
   expect_that(x[['systemName']], equals("tc_Simple_1_2"))
   expect_that(x[['systemDescription']], equals("One wild type virus that can stochastically mutate into 2 target strains. This allows for 2 different stochastic events and 2 different 'paths' through the system. No treatment effect but strain 2 is more fit than strain 1"))
   expect_that(x[['Pf']], equals(c(0.95, 1, 0.96)))
-  expect_that(x[['treatments']], equals(list(list(t = 0, Te = 0.0, Ts = c(0.8, 0.80, 0.75)))))
+  expect_that(x[['treatments']], equals(list(list(t = 0, A = 0.0, Ts = c(0.8, 0.80, 0.75)))))
   expect_that(x[['mutationAcceleration']], equals(1.5*(10^(-1))))
   expect_that(x[['Td']], equals(0.2))
   expect_that(x[['N_S']], equals(3))

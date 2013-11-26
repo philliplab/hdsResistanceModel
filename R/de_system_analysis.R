@@ -39,7 +39,7 @@ findSteadyState <- function(){
 
 Pf_steady_state_relationship <- function(Pf, scenario){
   scenario$Pf <- Pf
-  scenario$treatments <- list(list(t=0, Te = 0, Ts = 0))
+  scenario$treatments <- list(list(t=0, A = 0, Ts = 0))
   scenario$N_S <- 1
   scenario$offStrains <- numeric(0)
   scenario$Epow <- 0

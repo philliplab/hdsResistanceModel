@@ -128,7 +128,7 @@ eventFunc <- function(t, y, parms){
   treatment_change_event <- function(){
     treatmentChanges <- lapply(treatments, `[[`, 't')
     treatmentTriggered <- which(t > unlist(treatmentChanges))
-    k <<- baseRate * Pf * (1 - treatments[[treatmentTriggered]]$Ts * treatments[[treatmentTriggered]]$Te) # effective per strain invasion rates
+    k <<- baseRate * Pf * (1 - treatments[[treatmentTriggered]]$Ts * treatments[[treatmentTriggered]]$A) # effective per strain invasion rates
     treatments[[treatmentTriggered]] <<- NULL
     return (state)
   }

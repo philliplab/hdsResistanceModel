@@ -23,9 +23,9 @@
 
   \item{treatments}{The treatment specification. A list of
   lists. Each inner list is the details of a single
-  treatment regine. When did it start (t), What is its
-  effect (Te) and how suceptible is each strain to this
-  treatment? (Ts) (vector with susceptibility for each
+  treatment regine. When did it start (t), How how does the
+  patient adhere (A) and how suceptible is each strain to
+  this treatment? (Ts) (vector with susceptibility for each
   strain). The outer list loops over each regime change.}
 
   \item{mutationAcceleration}{A factor that accellerates
@@ -83,9 +83,9 @@
 }
 \details{
   When the effective invasion rates are computed Pf*(1 -
-  Ts*Te), then the effective invasion rates must be greater
+  Ts*A), then the effective invasion rates must be greater
   than Td and smaller than 1. Where Ts is the treatment
-  suceptibility and Te is the treatment effect
+  suceptibility and A is the treatment effect
 
   The Epow mutation matrix contains the number of mutation
   event that must occur to mutate from one strain to

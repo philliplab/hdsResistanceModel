@@ -13,7 +13,7 @@ get_all_scenarios <- function(){
     systemName = "tc_Simple_1_0",
     systemDescription = "One wild type virus with no mutations possible. Primarily used in test cases",
     Pf = c(0.95), # Fitnesses of the different strains
-    treatments = list(list(t = 0, Te = 0.0, Ts = c(0))),
+    treatments = list(list(t = 0, A = 0.0, Ts = c(0))),
     mutationAcceleration = 0.15, # adjustment to make the timescales reasonable
     Td = 0.2, # Tcell depletion - ratio of pre-infected to post-infected equilibria
     N_S = 1, # Number of strains in system
@@ -30,7 +30,7 @@ get_all_scenarios <- function(){
   This allows for 2 different stochastic events and 2 different 'paths' through the system. 
   No treatment effect but strain 2 is more fit than strain 1",
     Pf = c(0.95, 1, 0.96), # Fitnesses of the different strains
-    treatments = list(list(t = 0, Te = 0.0, Ts = c(0.8, 0.80, 0.75))),
+    treatments = list(list(t = 0, A = 0.0, Ts = c(0.8, 0.80, 0.75))),
     mutationAcceleration = 1.5*(10^(-1)), # adjustment to make the timescales reasonable
     Td = 0.2, # Tcell depletion - ratio of pre-infected to post-infected equilibria
     N_S = 3, # Number of strains in system
@@ -49,7 +49,7 @@ get_all_scenarios <- function(){
     get one strain and from this strain another 2 point mutations to get to a third possible strain.
     Strains have increasing fitness.",
     Pf = c(1,1,1), # Fitnesses of the different strains
-    treatments = list(list(t = 0, Te = 1, Ts = 1-c(0.807442176870748, 0.857971014492754, 0.95))),
+    treatments = list(list(t = 0, A = 1, Ts = 1-c(0.807442176870748, 0.857971014492754, 0.95))),
     Td = 0.2, # Tcell depletion - ratio of pre-infected to post-infected equilibria
     N_S = 3, # Number of strains in system
     offStrains = c(2,3), # Strains not present in the initial system
@@ -67,7 +67,7 @@ get_all_scenarios <- function(){
     get one strain and from this strain another 2 point mutations to get to a third possible strain.
     Strains have increasing fitness.",
     Pf = c(0.891335109,1,1), # Fitnesses of the different strains
-    treatments = list(list(t = 0, Te = 1, Ts = 1-c(0.5609671, 0.6500803, 1))),
+    treatments = list(list(t = 0, A = 1, Ts = 1-c(0.5609671, 0.6500803, 1))),
     N_S = 3, # Number of strains in system
     offStrains = c(2,3), # Strains not present in the initial system
     stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
@@ -86,7 +86,7 @@ get_all_scenarios <- function(){
     get one strain and from this strain another 2 point mutations to get to a third possible strain.
     Strains have increasing fitness.",
     Pf = c(1,1,1), # Fitnesses of the different strains
-    treatments = list(list(t = 0, Te = 1, Ts = 1-c(0.5609671, 0.6500803, 1))),
+    treatments = list(list(t = 0, A = 1, Ts = 1-c(0.5609671, 0.6500803, 1))),
     N_S = 3, # Number of strains in system
     offStrains = c(2,3), # Strains not present in the initial system
     stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
@@ -105,7 +105,7 @@ get_all_scenarios <- function(){
     get one strain and from this strain another 2 point mutations to get to a third possible strain.
     Strains have increasing fitness.",
     Pf = c(1,1,1), # Fitnesses of the different strains
-    treatments = list(list(t = 0, Te = 1, Ts = 1-c(0.5609671, 0.6500803, 1))),
+    treatments = list(list(t = 0, A = 1, Ts = 1-c(0.5609671, 0.6500803, 1))),
     mutationAcceleration = 1, #1.5*(10^(-1)), # adjustment to make the timescales reasonable
     N_S = 3, # Number of strains in system
     offStrains = c(2,3), # Strains not present in the initial system
@@ -125,7 +125,7 @@ get_all_scenarios <- function(){
 #   This allows for 1 stochastic events and 1 'path' through the system. 
 #   No treatment effect but strain 3 is more fit than strains 1 and 2",
 #   Pf = c(0.95, 0.949, 1), # Fitnesses of the different strains
-#   treatments = list(list(t = 0, Te = 0.0, Ts = c(0.8, 0.80, 0.75))),
+#   treatments = list(list(t = 0, A = 0.0, Ts = c(0.8, 0.80, 0.75))),
 #   mutationAcceleration = 1.5*(10^(-1)), # adjustment to make the timescales reasonable
 #   Td = 0.2, # Tcell depletion - ratio of pre-infected to post-infected equilibria
 #   N_S = 3, # Number of strains in system
@@ -144,7 +144,7 @@ get_all_scenarios <- function(){
 #   This allows for 2 stochastic events and 2 'paths' through the system. 
 #   No treatment effect but strains 2 and 4 are more fit than strains 1 and 3",
 #   Pf = c(0.95, 1, 0.951, 1), # Fitnesses of the different strains
-#   treatments = list(list(t = 0, Te = 0.0, Ts = c(0.8, 0.80, 0.75, 0.8))),
+#   treatments = list(list(t = 0, A = 0.0, Ts = c(0.8, 0.80, 0.75, 0.8))),
 #   mutationAcceleration = 2*(10^(-1)), # adjustment to make the timescales reasonable
 #   Td = 0.2, # Tcell depletion - ratio of pre-infected to post-infected equilibria
 #   N_S = 4, # Number of strains in system
@@ -162,7 +162,7 @@ get_all_scenarios <- function(){
 #   systemName = "RepRes_1_1",
 #   systemDescription = "Two strains that can mutate into each other. An attempt to show repeated ressurection",
 #   Pf = c(0.85, 0.95), # Fitnesses of the different strains
-#   treatments = list(list(t=0, Te = 0.0, Ts = c(0.8, 0.80))),
+#   treatments = list(list(t=0, A = 0.0, Ts = c(0.8, 0.80))),
 #   mutationAcceleration = 2*(10^(-1)), # adjustment to make the timescales reasonable
 #   Td = 0.2, # Tcell depletion - ratio of pre-infected to post-infected equilibria
 #   N_S = 2, # Number of strains in system
@@ -178,10 +178,10 @@ get_all_scenarios <- function(){
 #   systemName = "Treatment_1_0",
 #   systemDescription = "One strain that cannot mutate. An attempt to illustrate varying levels of treatment",
 #   Pf = c(0.85), # Fitnesses of the different strains
-#   treatments = list(list(t=0, Te = 0, Ts = c(0.8)),
-#                     list(t=500, Te = 0.1, Ts = c(0.8)),
-#                     list(t=1000, Te = 0.0, Ts = c(0.8)),
-#                     list(t=1500, Te = 0.2, Ts = c(0.8))
+#   treatments = list(list(t=0, A = 0, Ts = c(0.8)),
+#                     list(t=500, A = 0.1, Ts = c(0.8)),
+#                     list(t=1000, A = 0.0, Ts = c(0.8)),
+#                     list(t=1500, A = 0.2, Ts = c(0.8))
 #                     ),
 #   mutationAcceleration = 2*(10^(-1)), # adjustment to make the timescales reasonable
 #   Td = 0.2, # Tcell depletion - ratio of pre-infected to post-infected equilibria
@@ -197,8 +197,8 @@ get_all_scenarios <- function(){
 #   systemName = "BadStart_1_1",
 #   systemDescription = "Initial infection with resistant strain. Untreated until wild type pushes resistant strain to very low population levels. Treatment is initiated causing the initial resistance to arise again",
 #   Pf = c(0.85, 1), # Fitnesses of the different strains
-#   treatments = list(list(t=0, Te = 0.0, Ts = c(0.8, 0.8)),
-#                     list(t=1985, Te = 0.3, Ts = c(0, 1))
+#   treatments = list(list(t=0, A = 0.0, Ts = c(0.8, 0.8)),
+#                     list(t=1985, A = 0.3, Ts = c(0, 1))
 #                     ),
 #   mutationAcceleration = 2*(10^(-1)), # adjustment to make the timescales reasonable
 #   Td = 0.2, # Tcell depletion - ratio of pre-infected to post-infected equilibria
@@ -215,8 +215,8 @@ get_all_scenarios <- function(){
 #   systemName = "PoorTreat_1_1",
 #   systemDescription = "FAILURE: Initial infection with wildType Strain. Resistant mutations occur, but are driven to extinction by dominance of wildType. Poor treatment is initiated allowing drug resistant strain to flourish",
 #   Pf = c(1, 0.90), # Fitnesses of the different strains
-#   treatments = list(list(t=0, Te = 0.0, Ts = c(0.8, 0.8)),
-#                     list(t=1000, Te = 0.18, Ts = c(1,0))
+#   treatments = list(list(t=0, A = 0.0, Ts = c(0.8, 0.8)),
+#                     list(t=1000, A = 0.18, Ts = c(1,0))
 #                     ),
 #   mutationAcceleration = 2.5*(10^(-1)), # adjustment to make the timescales reasonable
 #   Td = 0.2, # Tcell depletion - ratio of pre-infected to post-infected equilibria
@@ -233,8 +233,8 @@ get_all_scenarios <- function(){
 #   systemName = "AccuRes_1_2",
 #   systemDescription = "3 strain system. Strain 1 very fit, but susceptible to treatment; strain 2 med fit, med susceptibility; strain 3: low fit los suscept",
 #   Pf = c(1, 0.95, 0.94), # Fitnesses of the different strains
-#   treatments = list(list(t=0, Te = 0.0, Ts = c(0.8, 0.8, 0.8)),
-#                     list(t=1000, Te = 0.1, Ts = c(1, 0.3, 0.0))
+#   treatments = list(list(t=0, A = 0.0, Ts = c(0.8, 0.8, 0.8)),
+#                     list(t=1000, A = 0.1, Ts = c(1, 0.3, 0.0))
 #                     ),
 #   mutationAcceleration = 2.5*(10^(-1)), # adjustment to make the timescales reasonable
 #   Td = 0.2, # Tcell depletion - ratio of pre-infected to post-infected equilibria
@@ -252,7 +252,7 @@ get_all_scenarios <- function(){
 #   systemName = "AccTams_1_4",
 #   systemDescription = "5 strain system. Going from very fit but susceptible to treatment to (roughly) moderate fitness but high resistance to treatment",
 #   Pf = c(0.99, 0.96, 0.92, 0.91, 1), # Fitnesses of the different strains
-#   treatments = list(list(t=0, Te = 0.19, Ts = c(1, 0.75, 0.5, 0.1, 0))
+#   treatments = list(list(t=0, A = 0.19, Ts = c(1, 0.75, 0.5, 0.1, 0))
 #                     ),
 #   mutationAcceleration = 1/200, # adjustment to make the timescales reasonable
 #   Td = 0.2, # Tcell depletion - ratio of pre-infected to post-infected equilibria
@@ -272,7 +272,7 @@ get_all_scenarios <- function(){
 #   systemName = "AccTams_1_3",
 #   systemDescription = "4 strain system. Going from very fit but susceptible to treatment to (roughly) moderate fitness but high resistance to treatment",
 #   Pf = c(0.99, 0.95, 0.93, 0.99), # Fitnesses of the different strains
-#   treatments = list(list(t=0, Te = 0.19, Ts = c(1, 0.75, 0.5, 0))
+#   treatments = list(list(t=0, A = 0.19, Ts = c(1, 0.75, 0.5, 0))
 #                     ),
 #   mutationAcceleration = 1/200, # adjustment to make the timescales reasonable
 #   Td = 0.2, # Tcell depletion - ratio of pre-infected to post-infected equilibria
@@ -291,7 +291,7 @@ get_all_scenarios <- function(){
 #   systemName = "Systematic_Buildup",
 #   systemDescription = "A Systematic build-up starting with one strain and adding ones slowly",
 #   Pf = c(0.5000003, 0.5000034), # Fitnesses of the different strains
-#   treatments = list(list(t=0, Te = 0, Ts = c(0))
+#   treatments = list(list(t=0, A = 0, Ts = c(0))
 #                     ),
 #   mutationAcceleration = 1, # adjustment to make the timescales reasonable
 #   Td = 0.5, # Tcell depletion - ratio of pre-infected to post-infected equilibria
@@ -308,7 +308,7 @@ get_all_scenarios <- function(){
    systemName = "Treat_no_Resist",
    systemDescription = "Under good treatment no resistance arises",
    Pf = c(1, 0.9), # Fitnesses of the different strains
-   treatments = list(list(t=0, Te = 1, Ts = c(0.499996621598795, 0))
+   treatments = list(list(t=0, A = 1, Ts = c(0.499996621598795, 0))
                      ),
    N_S = 2, # Number of strains in system
    offStrains = c(2), # Strains not present in the initial system
@@ -325,7 +325,7 @@ get_all_scenarios <- function(){
    systemName = "no_Treat_no_Resist",
    systemDescription = "Under no treatment no resistance arises",
    Pf = c(1, 0.9), # Fitnesses of the different strains
-   treatments = list(list(t=0, Te = 0, Ts = c(0.499996621598795, 0))
+   treatments = list(list(t=0, A = 0, Ts = c(0.499996621598795, 0))
                      ),
    N_S = 2, # Number of strains in system
    offStrains = c(2), # Strains not present in the initial system
@@ -342,7 +342,7 @@ get_all_scenarios <- function(){
    systemName = "poor_Treat_then_Resist",
    systemDescription = "Under poor treatment resistance arises",
    Pf = c(1, 0.9), # Fitnesses of the different strains
-   treatments = list(list(t=0, Te = 0.9, Ts = c(0.499996621598795, 0))
+   treatments = list(list(t=0, A = 0.9, Ts = c(0.499996621598795, 0))
                      ),
    N_S = 2, # Number of strains in system
    offStrains = c(2), # Strains not present in the initial system

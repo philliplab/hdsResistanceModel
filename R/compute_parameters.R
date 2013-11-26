@@ -12,7 +12,7 @@ compute_parameters <- function(scenario_parameters){
     er <- er*mutationAcceleration # adjustment to make the timescales reasonable
     baseRate <- (mu_T*mu_P)/(f * (1 - Td) * S_T) # Modifier for invasion rates
     stopifnot(treatments[[1]]$t == 0)
-    fitnessAdjustment <- Pf * (1 - treatments[[1]]$Ts * treatments[[1]]$Te)
+    fitnessAdjustment <- Pf * (1 - treatments[[1]]$Ts * treatments[[1]]$A)
     k <- baseRate * fitnessAdjustment # effective per strain invasion rates
     treatments[[1]] <- NULL
     E <- f*(er^Epow)
