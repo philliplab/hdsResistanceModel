@@ -12,7 +12,7 @@ compute_parameters <- function(scenario_parameters){
     er <- er*mutationAcceleration # adjustment to make the timescales reasonable
     baseRate <- (mu_T*mu_P)/(f * (1 - Td) * S_T) # Modifier for invasion rates
     stopifnot(treatments[[1]]$t == 0)
-    fitnessAdjustment <- Pf * (1 - treatments[[1]]$Ts * treatments[[1]]$A)
+    fitnessAdjustment <- kBase * (1 - treatments[[1]]$Ts * treatments[[1]]$A)
     k <- baseRate * fitnessAdjustment # effective per strain invasion rates
     treatments[[1]] <- NULL
     E <- f*(er^mutMat)
@@ -21,7 +21,7 @@ compute_parameters <- function(scenario_parameters){
     mutateCont <- toggle_mutation_matrix(E, offStrains, type = 'continuous', N_S)
     mutateDisc <- toggle_mutation_matrix(E, offStrains, type = 'discrete', N_S)
     
-    stopifnot(length(k) == length(Pf))
+    stopifnot(length(k) == length(kBase))
     stopifnot(length(k) == N_S)
     stopifnot(N_d > -1)
     stopifnot(nrow(E) == ncol(E))

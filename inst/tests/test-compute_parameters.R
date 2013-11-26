@@ -6,7 +6,7 @@ test_that("the compute_parameters function matches precomputed values",{
   params <- compute_parameters(scenario_parameters)
   expected_params <- list(timeStep = 1, timeStop = 1500, systemName = "tc_AccuTams_1_2", 
     systemDescription = "One wild strain is present initially. Two other strains can evolve - 2 point mutations to get\n    get one strain and from this strain another 2 point mutations to get to a third possible strain.\n    Strains have increasing fitness.", 
-    Pf = c(1, 1, 1), treatments = list(), mutationAcceleration = 1, 
+    kBase = c(1, 1, 1), treatments = list(), mutationAcceleration = 1, 
     Td = 0.2, N_S = 3, offStrains = c(2, 3), stochasticEventThresholdSource = function () 
     {
         return(runif(1))
@@ -33,7 +33,7 @@ test_that("the compute_parameters function does not fail some sanity checks on m
       set.seed(seed)
       params <- compute_parameters(scenario_parameters)
       with(params, {
-        expect_that(length(k), equals(length(Pf)))
+        expect_that(length(k), equals(length(kBase)))
         expect_that(length(k), equals(N_S))
         expect_that(N_d > -1, is_true())
         expect_that(nrow(E), equals(ncol(E)))

@@ -3,7 +3,7 @@
 \title{Checks input list for problems and throw an error or returns a valid scenario specification}
 \usage{
   scenario(timeStep, timeStop, systemName,
-    systemDescription, Pf, treatments, N_S, offStrains,
+    systemDescription, kBase, treatments, N_S, offStrains,
     stochasticEventThresholdSource, mutMat,
     mutationAcceleration = 1, Td = 0.5, er = 10^(-4),
     mu_T = 0.02, mu_P = 0.5, S_T = 2 * 10^8, f = 0.37,
@@ -19,7 +19,7 @@
 
   \item{systemDescription}{A description for the system}
 
-  \item{Pf}{Fitnesses of the different strains.}
+  \item{kBase}{Fitnesses of the different strains.}
 
   \item{treatments}{The treatment specification. A list of
   lists. Each inner list is the details of a single
@@ -82,7 +82,7 @@
   documentation for the input parameters
 }
 \details{
-  When the effective invasion rates are computed Pf*(1 -
+  When the effective invasion rates are computed kBase*(1 -
   Ts*A), then the effective invasion rates must be greater
   than Td and smaller than 1. Where Ts is the treatment
   suceptibility and A is the treatment effect

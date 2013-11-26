@@ -3,7 +3,7 @@
 #' The main goal of this function is to perform sanity checks on a scenario specification and to provide
 #' documentation for the input parameters
 #'
-#' When the effective invasion rates are computed Pf*(1 - Ts*A), then the effective invasion rates must
+#' When the effective invasion rates are computed kBase*(1 - Ts*A), then the effective invasion rates must
 #' be greater than Td and smaller than 1.
 #' Where Ts is the treatment suceptibility and A is the treatment effect
 #' 
@@ -21,7 +21,7 @@
 #' @param timeStop Run the system until this time
 #' @param systemName A name for the system
 #' @param systemDescription A description for the system
-#' @param Pf Fitnesses of the different strains.
+#' @param kBase Fitnesses of the different strains.
 #' @param treatments The treatment specification. A list of lists. Each inner list is the details of a single treatment regine. When did it start (t), How how does the patient adhere (A) and how suceptible is each strain to this treatment? (Ts) (vector with susceptibility for each strain). The outer list loops over each regime change.
 #' @param mutationAcceleration A factor that accellerates the rate of mutaton. Needed to get the timescales for when mutations arises right
 #' @param Td Tcell depletion - ratio of pre-infected to post-infected equilibria. It also sets the scale for the acceptible range of the relative fitnesses of the strains.
@@ -42,7 +42,7 @@
 #' @export
 
 scenario <- function(timeStep, timeStop, systemName, systemDescription, 
-                     Pf, treatments, N_S, 
+                     kBase, treatments, N_S, 
                      offStrains, stochasticEventThresholdSource, mutMat,
                      mutationAcceleration = 1, Td = 0.5,
                      er = 10^(-4), mu_T = 0.02, mu_P = 0.5, 
@@ -51,7 +51,7 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
                      deathModifier = 1.001, newStrainLevel = 1){
   
   # check that numeric variables are numeric
-  numeric_variables <- c("timeStep", "timeStop", "Pf", "N_S", "offStrains", 
+  numeric_variables <- c("timeStep", "timeStop", "kBase", "N_S", "offStrains", 
                          "mutMat", "mutationAcceleration", "Td", "er", "mu_T",
                          "mu_P", "S_T", "f", "deathThreshold", "offThreshold",
                          "deathModifier", "newStrainLevel")
@@ -78,7 +78,7 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
     timeStop = timeStop,
     systemName = systemName,
     systemDescription = systemDescription,
-    Pf = Pf,
+    kBase = kBase,
     treatments = treatments,
     mutationAcceleration = mutationAcceleration,
     Td = Td,

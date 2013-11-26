@@ -5,7 +5,7 @@ scenario_spec <- list(
     timeStop = 1000,
     systemName = "tc_Simple_1_2",
     systemDescription = "One wild type virus that can stochastically mutate into 2 target strains. This allows for 2 different stochastic events and 2 different 'paths' through the system. No treatment effect but strain 2 is more fit than strain 1",
-    Pf = c(0.95, 1, 0.96),
+    kBase = c(0.95, 1, 0.96),
     treatments = list(list(t = 0, A = 0.0, Ts = c(0.8, 0.80, 0.75))),
     mutationAcceleration = 1.5*(10^(-1)),
     Td = 0.2,
@@ -22,7 +22,7 @@ test_that("A correct specification yields a correctly formatted list",{
   x_names <- sort(names(x))
   expected_names <- sort(c("deathModifier", "deathThreshold", "mutMat", "er", "f", "mu_P", 
                            "mu_T", "mutationAcceleration", "N_S", "offStrains", 
-                           "offThreshold", "Pf", "S_T", "stochasticEventThresholdSource",
+                           "offThreshold", "kBase", "S_T", "stochasticEventThresholdSource",
                            "systemDescription", "systemName", "Td", "timeStep", "timeStop", 
                            "treatments", "newStrainLevel"))
   expect_that(x, is_a('list'))
@@ -30,7 +30,7 @@ test_that("A correct specification yields a correctly formatted list",{
   expect_that(x[['timeStop']], equals(1000))
   expect_that(x[['systemName']], equals("tc_Simple_1_2"))
   expect_that(x[['systemDescription']], equals("One wild type virus that can stochastically mutate into 2 target strains. This allows for 2 different stochastic events and 2 different 'paths' through the system. No treatment effect but strain 2 is more fit than strain 1"))
-  expect_that(x[['Pf']], equals(c(0.95, 1, 0.96)))
+  expect_that(x[['kBase']], equals(c(0.95, 1, 0.96)))
   expect_that(x[['treatments']], equals(list(list(t = 0, A = 0.0, Ts = c(0.8, 0.80, 0.75)))))
   expect_that(x[['mutationAcceleration']], equals(1.5*(10^(-1))))
   expect_that(x[['Td']], equals(0.2))
@@ -43,7 +43,7 @@ test_that("A correct specification yields a correctly formatted list",{
 
 test_that("An incorrect specification throws an error",{
   numeric_variables <- c("mutMat", "mutationAcceleration", "N_S", "offStrains", 
-                         "Pf", "Td", "timeStep", "timeStop", "er", "mu_T",
+                         "kBase", "Td", "timeStep", "timeStop", "er", "mu_T",
                          "mu_P", "S_T", "f", "deathThreshold", "offThreshold",
                          "deathModifier", "newStrainLevel")
   for (var_name in numeric_variables){

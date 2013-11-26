@@ -22,8 +22,8 @@ test_that("the steady states found by the 1d versions of the analytic steady sol
   fitnesses <- c(0.8000001, 0.8000002, 0.80001, 0.8001, 0.81, 0.9, 0.95)
   for (fitness in fitnesses){
     scenario <- get_scenario('tc_Simple_1_0')
-    predicted_steady_state <- Pf_steady_state_relationship(fitness, scenario)[1]
-    scenario$Pf <- fitness
+    predicted_steady_state <- kBase_steady_state_relationship(fitness, scenario)[1]
+    scenario$kBase <- fitness
     ss <- run_system(scenario, 1)
     expect_that(all(abs(ss$X1 - predicted_steady_state) < 10^-7), is_true())
   }
@@ -33,8 +33,8 @@ test_that("the fitness predicted by the analytical steady state solver to realiz
   population_levels <- c(10^2, 10^3, 10^4, 10^5, 10^6, 234, 5467.6, 23129.432)
   for (population_level in population_levels){
     scenario <- get_scenario('tc_Simple_1_0')
-    predicted_fitness <- steady_state_Pf_relationship(population_level, scenario)
-    scenario$Pf <- predicted_fitness
+    predicted_fitness <- steady_state_kBase_relationship(population_level, scenario)
+    scenario$kBase <- predicted_fitness
     ss <- run_system(scenario, 1)
     expect_that(all(abs(ss$X1 - population_level) < (10^-7) * population_level), is_true())
   }

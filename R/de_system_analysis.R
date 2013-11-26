@@ -24,21 +24,21 @@ findSteadyState <- function(){
   return(initVec)
 }
 
-#' Express the relationship steady state = f(Pf) under specific circumstances
+#' Express the relationship steady state = f(kBase) under specific circumstances
 #' 
 #' The specific circumstances are:
 #' 1) There is only 1 strain in the system
 #' 2) There is no treatment
 #' 
-#' @param Pf The relative fitness of the strain
+#' @param kBase The relative fitness of the strain
 #' @param scenario The parameters that specify the scenario
 #' @export
 #' @examples
-#' Pf_steady_state_relationship(0.95, get_scenario('tc_Simple_1_2'))
+#' kBase_steady_state_relationship(0.95, get_scenario('tc_Simple_1_2'))
 #' # [1]   23368421 8421052632          1
 
-Pf_steady_state_relationship <- function(Pf, scenario){
-  scenario$Pf <- Pf
+kBase_steady_state_relationship <- function(kBase, scenario){
+  scenario$kBase <- kBase
   scenario$treatments <- list(list(t=0, A = 0, Ts = 0))
   scenario$N_S <- 1
   scenario$offStrains <- numeric(0)
@@ -51,7 +51,7 @@ Pf_steady_state_relationship <- function(Pf, scenario){
   return(initial_values)
 }
 
-#' Express the relationship Pf = f(steady state) under specific circumstances
+#' Express the relationship kBase = f(steady state) under specific circumstances
 #' 
 #' The specific circumstances are:
 #' 1) There is only 1 strain in the system
@@ -62,16 +62,16 @@ Pf_steady_state_relationship <- function(Pf, scenario){
 #' @export
 #' 
 #' @examples
-#' as.character(steady_state_Pf_relationship(1000, get_scenario('tc_Simple_1_2')))
+#' as.character(steady_state_kBase_relationship(1000, get_scenario('tc_Simple_1_2')))
 #' # [1] "0.800005405441929"
 #' 
-#' plot(steady_state_Pf_relationship(seq(100000, 10000000, 100000), get_scenario('tc_Simple_1_2')))
+#' plot(steady_state_kBase_relationship(seq(100000, 10000000, 100000), get_scenario('tc_Simple_1_2')))
 
-steady_state_Pf_relationship <- function(P0s, scenario){
+steady_state_kBase_relationship <- function(P0s, scenario){
   solution <- numeric(0)
   for (steady_state in P0s){
     foo <- function(x, scenario){
-      Pf_steady_state_relationship(x, scenario)[1] - steady_state
+      kBase_steady_state_relationship(x, scenario)[1] - steady_state
     }
     solution <- c(solution, uniroot(foo, c(1-scenario$Td, 1), scenario = scenario, tol = 0.1^20)$root)
   }
