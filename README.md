@@ -28,13 +28,13 @@ help(package = 'hdsResistanceModel')
 This will list all the functions exposed by this package. The documentation is minimal at the moment, but each function has a brief description and all the parameters used by each function is also described.
 
 ```r
-solved_system <- run_system(get_scenario('AccuTams_1_3'), 3)
+solved_system <- run_system(get_scenario('AccuTams_1_2_2'), 4)
 
 plotVars <- format_data(solved_system)
 
 plot_system(plotVars, 'All', 'plots.pdf')
 ```
 
-The three commands above will run the 'AccuTams_1_3' system and plot it in a file called plots.pdf in the current working directory.
+The three commands above will run the 'AccuTams_1_2_2' system and plot it in a file called plots.pdf in the current working directory.
 
 All example scenarios can be listed using the `get_scenario_names` function.
