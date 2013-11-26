@@ -66,8 +66,8 @@ get_all_scenarios <- function(){
     systemDescription = "One wild strain is present initially. Two other strains can evolve - 2 point mutations to get
     get one strain and from this strain another 2 point mutations to get to a third possible strain.
     Strains have increasing fitness.",
-    Pf = c(1,1,1), # Fitnesses of the different strains
-    treatments = list(list(t = 0, Te = 1, Ts = 1-c(0.500009671, 0.5700803, 1))),
+    Pf = c(0.891335109,1,1), # Fitnesses of the different strains
+    treatments = list(list(t = 0, Te = 1, Ts = 1-c(0.5609671, 0.6500803, 1))),
     N_S = 3, # Number of strains in system
     offStrains = c(2,3), # Strains not present in the initial system
     stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
@@ -86,7 +86,7 @@ get_all_scenarios <- function(){
     get one strain and from this strain another 2 point mutations to get to a third possible strain.
     Strains have increasing fitness.",
     Pf = c(1,1,1), # Fitnesses of the different strains
-    treatments = list(list(t = 0, Te = 1, Ts = 1-c(0.5609671, 0.6900803, 1))),
+    treatments = list(list(t = 0, Te = 1, Ts = 1-c(0.5609671, 0.6500803, 1))),
     N_S = 3, # Number of strains in system
     offStrains = c(2,3), # Strains not present in the initial system
     stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
@@ -105,7 +105,7 @@ get_all_scenarios <- function(){
     get one strain and from this strain another 2 point mutations to get to a third possible strain.
     Strains have increasing fitness.",
     Pf = c(1,1,1), # Fitnesses of the different strains
-    treatments = list(list(t = 0, Te = 1, Ts = 1-c(0.5309671, 0.5900803, 0.95))),
+    treatments = list(list(t = 0, Te = 1, Ts = 1-c(0.5609671, 0.6500803, 1))),
     mutationAcceleration = 1, #1.5*(10^(-1)), # adjustment to make the timescales reasonable
     N_S = 3, # Number of strains in system
     offStrains = c(2,3), # Strains not present in the initial system
