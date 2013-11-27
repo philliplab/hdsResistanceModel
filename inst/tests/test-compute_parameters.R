@@ -21,7 +21,9 @@ test_that("the compute_parameters function matches precomputed values",{
     1.44927536231884e-10, 1.60472972972973e-10), fitnessAdjustment = c(0.807442176870748, 
     0.857971014492754, 0.95), baseRate = 1.68918918918919e-10, 
     N_d = 1)
-  expect_that(params, equals(expected_params))
+  for (param_name in names(expected_params)){
+    expect_that(params[[param_name]], equals(expected_params[[param_name]]))
+  }
 })
 
 test_that("the compute_parameters function does not fail some sanity checks on many test scenarios", {

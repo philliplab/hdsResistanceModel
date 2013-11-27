@@ -11,7 +11,6 @@ compute_parameters <- function(scenario_parameters){
     mutMat <- matrix(mutMat, nrow = N_S)
     er <- er*mutationAcceleration # adjustment to make the timescales reasonable
     baseRate <- (mu_T*mu_P)/(f * (1 - Td) * S_T) # Modifier for invasion rates
-    stopifnot(treatments[[1]]$t == 0)
     fitnessAdjustment <- kBase * (1 - treatments[[1]]$Ts * treatments[[1]]$A)
     k <- baseRate * fitnessAdjustment # effective per strain invasion rates
     treatments[[1]] <- NULL

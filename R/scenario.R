@@ -72,6 +72,14 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
 
   if (mutationAcceleration != 1) warning("It is strongly recommended that mutationAcceleration be set to 1")
   if (Td != 0.5) warning("It is strongly recommended that Td be set to 0.5")
+  if (class(treatments) != 'list') stop("treatments must be a list")
+  if (length(treatments) == 0) stop("at least one treatment must be specified")
+  if (treatments[[1]]$t != 0) stop("first treatment must start at t=0")
+  for (treatment_num in 1:length(treatments)){
+    if (any(!(sort(names(treatments[[treatment_num]])) == c("A", "t", "Ts")))){ 
+      stop ("incorrect treatment - must be a list with params t, A and Ts")
+    }
+  }
   
   # check timeStop / timeStep relationship
   if (timeStep > timeStop / 10){stop("timeStep must be < timeStop/10")}

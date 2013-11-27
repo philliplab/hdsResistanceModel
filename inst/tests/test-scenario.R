@@ -42,6 +42,7 @@ test_that("A correct specification yields a correctly formatted list",{
 })
 
 test_that("An incorrect specification throws an error",{
+  # Numeric variables
   numeric_variables <- c("mutMat", "mutationAcceleration", "N_S", "offStrains", 
                          "kBase", "Td", "timeStep", "timeStop", "er", "mu_T",
                          "mu_P", "S_T", "f", "deathThreshold", "offThreshold",
@@ -52,8 +53,42 @@ test_that("An incorrect specification throws an error",{
     err_msg <- str_c(var_name, ' is not numeric')
     expect_that(do.call(scenario, nonnumeric_variable), throws_error(err_msg))
   }
+  
+  # timeStep / timeStop
   wrong_timeStep <- scenario_spec
   wrong_timeStep[['timeStep']] <- 150
   err_msg <- "timeStep must be < timeStop/10"
   expect_that(do.call(scenario, wrong_timeStep), throws_error(err_msg))
+  
+  # treatments
+  wrong_treatment1 <- scenario_spec
+  wrong_treatment1[['treatments']] <- 1
+  err_msg <- "treatments must be a list"
+  expect_that(do.call(scenario, wrong_treatment1), throws_error(err_msg))
+
+  wrong_treatment2 <- scenario_spec
+  wrong_treatment2[['treatments']] <- list()
+  err_msg <- "at least one treatment must be specified"
+  expect_that(do.call(scenario, wrong_treatment2), throws_error(err_msg))
+
+  wrong_treatment3 <- scenario_spec
+  wrong_treatment3[['treatments']] <- list(list(t=1))
+  err_msg <- "first treatment must start at t=0"
+  expect_that(do.call(scenario, wrong_treatment3), throws_error(err_msg))
+
+  wrong_treatment4 <- scenario_spec
+  wrong_treatment4[['treatments']] <- list(list(t=0))
+  err_msg <- "incorrect treatment - must be a list with params t, A and Ts"
+  expect_that(do.call(scenario, wrong_treatment4), throws_error(err_msg))
+
+  wrong_treatment5 <- scenario_spec
+  wrong_treatment5[['treatments']] <- list(list(t=0, A = 1, Ts = c(0,0,0), bla = "boom"))
+  err_msg <- "incorrect treatment - must be a list with params t, A and Ts"
+  expect_that(do.call(scenario, wrong_treatment5), throws_error(err_msg))
+
+  wrong_treatment6 <- scenario_spec
+  wrong_treatment6[['treatments']] <- list(list(t=0, A = 1, Ts = c(0,0,0)),
+                                           list(t=10, A = 1, Ts = c(0,0,0), bla = "boom"))
+  err_msg <- "incorrect treatment - must be a list with params t, A and Ts"
+  expect_that(do.call(scenario, wrong_treatment6), throws_error(err_msg))
 })
