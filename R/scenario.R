@@ -79,8 +79,8 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
     if (any(!(sort(names(treatments[[treatment_num]])) == c("A", "t", "Ts")))){ 
       stop ("incorrect treatment - must be a list with params t, A and Ts")
     }
-#    fitnessAdjustment <- compute_fitnessAdjustment(kBase, treatments, treatment_num)
-#    if (any(fitnessAdjustment < Td)) stop("kBase * (1 - A * Ts) must be greater than Td")
+    fitnessAdjustment <- compute_fitnessAdjustment(kBase, treatments, treatment_num)
+    if (any(fitnessAdjustment < Td)) stop("kBase * (1 - A * Ts) must be greater than Td")
   }
 
 

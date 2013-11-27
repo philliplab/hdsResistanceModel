@@ -91,4 +91,13 @@ test_that("An incorrect specification throws an error",{
                                            list(t=10, A = 1, Ts = c(0,0,0), bla = "boom"))
   err_msg <- "incorrect treatment - must be a list with params t, A and Ts"
   expect_that(do.call(scenario, wrong_treatment6), throws_error(err_msg))
+
+  wrong_treatment6 <- scenario_spec
+  wrong_treatment6[['treatments']] <- list(list(t=0, A = 1, Ts = c(1,0,0)))
+  err_msg <- "must be greater than Td" # Only use partial match because of regexp weirdness
+  expect_that(do.call(scenario, wrong_treatment6), throws_error(err_msg))
+
+  err_msg <- "must be greater than Td" # Only use partial match because of regexp weirdness
+  expect_that(get_scenario('AccuTams_1_2_3', modified_parameters = list(kBase = c(0.5,1,1))), 
+              throws_error(err_msg))
 })
