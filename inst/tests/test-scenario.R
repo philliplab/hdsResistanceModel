@@ -93,11 +93,30 @@ test_that("An incorrect specification throws an error",{
   expect_that(do.call(scenario, wrong_treatment6), throws_error(err_msg))
 
   wrong_treatment6 <- scenario_spec
-  wrong_treatment6[['treatments']] <- list(list(t=0, A = 1, Ts = c(1,0,0)))
+  wrong_treatment6[['treatments']] <- list(list(t=0, A = 1, Ts = c(0.8,0,0)))
   err_msg <- "must be greater than Td" # Only use partial match because of regexp weirdness
   expect_that(do.call(scenario, wrong_treatment6), throws_error(err_msg))
 
   err_msg <- "must be greater than Td" # Only use partial match because of regexp weirdness
   expect_that(get_scenario('AccuTams_1_2_3', modified_parameters = list(kBase = c(0.5,1,1))), 
               throws_error(err_msg))
+
+  err_msg <- "kBase not in " # Only use partial match because of regexp weirdness
+  expect_that(get_scenario('AccuTams_1_2_3', modified_parameters = list(kBase = c(1.4,1,1))), 
+              throws_error(err_msg))
+
+  err_msg <- "kBase not in " # Only use partial match because of regexp weirdness
+  expect_that(get_scenario('AccuTams_1_2_3', modified_parameters = list(kBase = c(0.4,1,1))), 
+              throws_error(err_msg))
+
+  wrong_treatment7 <- scenario_spec
+  wrong_treatment7[['treatments']] <- list(list(t=0, A = 1, Ts = c(0.9,0,0)))
+  err_msg <- "A x Ts not in" # Only use partial match because of regexp weirdness
+  expect_that(do.call(scenario, wrong_treatment7), throws_error(err_msg))
+
+  wrong_treatment8 <- scenario_spec
+  wrong_treatment8[['treatments']] <- list(list(t=0, A = -1, Ts = c(0.9,0,0)))
+  err_msg <- "A x Ts not in" # Only use partial match because of regexp weirdness
+  expect_that(do.call(scenario, wrong_treatment8), throws_error(err_msg))
+
 })

@@ -61,17 +61,25 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
     if(!is.numeric(numeric_variable_value)) {stop(str_c(numeric_variable, ' is not numeric'))}
   }
 
+  # Thresholds
   if (deathThreshold > offThreshold) stop("deathThreshold > offThreshold")
   if (deathThreshold > newStrainLevel) stop("deathThreshold > newStrainLevel")
   if (offThreshold > newStrainLevel) stop("offThreshold > newStrainLevel")
 
+  # mutMat
   if (is.null(mutMat)) stop("mutMat cannot be NULL")
   x <- mutMat[mutMat != Inf]
   if (!all(x == as.integer(x))) stop("Non-integer entries in mutation matrix")
   rm(x)
 
+  # Values to be deprecated
   if (mutationAcceleration != 1) warning("It is strongly recommended that mutationAcceleration be set to 1")
   if (Td != 0.5) warning("It is strongly recommended that Td be set to 0.5")
+  
+  #kBase
+  if ((kBase < Td) | (kBase > 1)) stop('kBase not in [Td, 1]')
+
+  # treatments
   if (class(treatments) != 'list') stop("treatments must be a list")
   if (length(treatments) == 0) stop("at least one treatment must be specified")
   if (treatments[[1]]$t != 0) stop("first treatment must start at t=0")
@@ -79,6 +87,15 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
     if (any(!(sort(names(treatments[[treatment_num]])) == c("A", "t", "Ts")))){ 
       stop ("incorrect treatment - must be a list with params t, A and Ts")
     }
+
+    # A and Ts
+    for (Ts_val in treatments[[treatment_num]][['Ts']]){
+      A_val <- treatments[[treatment_num]][['A']]
+      if ((A_val*Ts_val > (1 - Td)) | (A_val*Ts_val < 0)) stop('A x Ts not in [0, Td]')
+    }
+
+
+    # kBase, A and Ts ratios
     fitnessAdjustment <- compute_fitnessAdjustment(kBase, treatments, treatment_num)
     if (any(fitnessAdjustment < Td)) stop("kBase * (1 - A * Ts) must be greater than Td")
   }
