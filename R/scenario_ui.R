@@ -13,9 +13,15 @@
 make_scenario_ui <- function(scenario){
   kBase <- scenario$kBase
   names(kBase) <- paste("Strain", 1:scenario$N_S, sep = "_")
+  mutMat <- scenario$mutMat
+  mutMat <- matrix(mutMat, nrow = sqrt(length(mutMat)), 
+                   ncol = sqrt(length(mutMat)))
+  mutMat <- data.frame(mutMat)
+  names(mutMat) <- paste("Strain", 1:scenario$N_S, sep = "_")
   c(
     numericInput('timeStep', 'timeStep', scenario$timeStep),
     numericInput('timeStop', 'timeStop', scenario$timeStop),
-    matrixInput('kBase', 'kBase', data.frame(as.list(kBase)))
+    matrixInput('kBase', 'kBase', data.frame(as.list(kBase))),
+    matrixInput('mutMat', 'mutMat', mutMat)
     )
 }

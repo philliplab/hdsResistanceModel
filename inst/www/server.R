@@ -11,6 +11,7 @@ shinyServer(function(input, output, session) {
     updateNumericInput(session, "timeStep", value = x$timeStep)
     updateNumericInput(session, "timeStop", value = x$timeStop)
     updateNumericInput(session, "kBase", value = data.frame(as.list(x$kBase)))
+    updateNumericInput(session, "mutMat", value = data.frame(as.list(x$mutMat)))
     print ('---------> SELECTED')
     print (scenario_changed)
     return(input$scenario)
@@ -26,10 +27,12 @@ shinyServer(function(input, output, session) {
     input_timeStop <- input$timeStop
     input_timeStep <- input$timeStep
     input_kBase <- input$kBase
+    input_mutMat <- input$mutMat
     if (!scenario_changed){
       mod_pars[['timeStop']] <- input_timeStop
       mod_pars[['timeStep']] <- input_timeStep
       mod_pars[['kBase']] <- as.numeric(input_kBase[1,])
+      mod_pars[['mutMat']] <- as.numeric(input_mutMat)
       x <- try(get_scenario(scenario_name, modified_parameters = mod_pars))
     }  else {
       x <- get_scenario(scenario_name)
