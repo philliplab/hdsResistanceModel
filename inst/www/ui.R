@@ -10,9 +10,14 @@ shinyUI(pageWithSidebar(
   ),
   mainPanel(
     h5(textOutput('status')),
-    plotOutput(outputId='Strain'),
-    plotOutput(outputId='tCells'),
-    plotOutput(outputId='notMutation'),
-    verbatimTextOutput('pars')
+    tabsetPanel(tabPanel("Plots", 
+                         plotOutput(outputId='Strain'),
+                         plotOutput(outputId='tCells'),
+                         plotOutput(outputId='notMutation')
+                         ),
+                tabPanel("Parameters",
+                         verbatimTextOutput('pars')
+                         )
+                )
   )
 ))
