@@ -28,7 +28,10 @@ make_scenario_ui <- function(scenario){
                    treatment$t),
       numericInput(str_c('A', i),
                    str_c('Adherence to Treatment Regimen ', i),
-                   treatment$A)
+                   treatment$A),
+      matrixInput(str_c('Ts',i),
+                  str_c('Susceptibilities to Regimen ', i),
+                  data.frame(as.list(treatment$Ts)))
       )
   }
   c(

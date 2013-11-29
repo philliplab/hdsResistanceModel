@@ -66,7 +66,7 @@ get_all_scenarios <- function(){
     systemDescription = "One wild type virus with no mutations possible. Two different treatment regnimens",
     kBase = c(1), # Fitnesses of the different strains
     treatments = list(list(t = 0, A = 0.0, Ts = c(0)),
-                      list(t = 500, A = 0.0, Ts = c(0.1))),
+                      list(t = 500, A = 1.0, Ts = c(0.1))),
     mutationAcceleration = 0.15, # adjustment to make the timescales reasonable
     Td = 0.2, # Tcell depletion - ratio of pre-infected to post-infected equilibria
     N_S = 1, # Number of strains in system

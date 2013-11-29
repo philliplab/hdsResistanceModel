@@ -16,7 +16,10 @@ shinyUI(pageWithSidebar(
                          plotOutput(outputId='notMutation')
                          ),
                 tabPanel("Parameters",
-                         verbatimTextOutput('pars')
+                         h4("Scenario Parameters"),
+                         verbatimTextOutput('pars'),
+                         h4("Input Parameters"),
+                         verbatimTextOutput('inputPars')
                          )
                 )
   )

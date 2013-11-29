@@ -76,6 +76,10 @@ shinyServer(function(input, output, session) {
     print(updated_scenario())
   })
 
+  output$inputPars <- renderPrint({
+    print(reactiveValuesToList(input))
+  })
+
   output$Strain <- renderPlot({
     print(plot_component(pv(), component = 'Strain'))
   })
