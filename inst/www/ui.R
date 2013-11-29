@@ -9,6 +9,7 @@ shinyUI(pageWithSidebar(
     uiOutput('scenarioUI')
   ),
   mainPanel(
+    h5(textOutput('status')),
     plotOutput(outputId='Strain'),
     plotOutput(outputId='tCells'),
     plotOutput(outputId='notMutation'),

@@ -77,7 +77,7 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
   if (Td != 0.5) warning("It is strongly recommended that Td be set to 0.5")
   
   #kBase
-  if ((kBase < Td) | (kBase > 1)) stop('kBase not in [Td, 1]')
+  if ((kBase < (1-Td)) | (kBase > 1)) stop('kBase not in [1-Td, 1]')
 
   # treatments
   if (class(treatments) != 'list') stop("treatments must be a list")
@@ -94,16 +94,14 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
       if ((A_val*Ts_val > (1 - Td)) | (A_val*Ts_val < 0)) stop('A x Ts not in [0, Td]')
     }
 
-
     # kBase, A and Ts ratios
     fitnessAdjustment <- compute_fitnessAdjustment(kBase, treatments, treatment_num)
     if (any(fitnessAdjustment < Td)) stop("kBase * (1 - A * Ts) must be greater than Td")
   }
 
-
-  
   # check timeStop / timeStep relationship
   if (timeStep > timeStop / 10){stop("timeStep must be < timeStop/10")}
+
   params <- list(
     timeStep = timeStep,
     timeStop = timeStop,
@@ -127,4 +125,5 @@ scenario <- function(timeStep, timeStop, systemName, systemDescription,
     deathModifier = deathModifier, # A strain is set to deathThreshold / deathModifier when it is extinct
     newStrainLevel = newStrainLevel
     )
+  return(params)
 }

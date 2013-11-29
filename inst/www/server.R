@@ -1,6 +1,7 @@
 library(hdsResistanceModel)
 
 scenario_changed <- FALSE
+err_msg <- NULL
 
 shinyServer(function(input, output, session) {
  
@@ -9,7 +10,7 @@ shinyServer(function(input, output, session) {
     scenario_changed <<- TRUE
     updateNumericInput(session, "timeStep", value = x$timeStep)
     updateNumericInput(session, "timeStop", value = x$timeStop)
-    updateNumericInput(session, "Pf", value = data.frame(as.list(x$Pf)))
+    updateNumericInput(session, "kBase", value = data.frame(as.list(x$kBase)))
     print ('---------> SELECTED')
     print (scenario_changed)
     return(input$scenario)
@@ -24,15 +25,19 @@ shinyServer(function(input, output, session) {
     print (scenario_changed)
     input_timeStop <- input$timeStop
     input_timeStep <- input$timeStep
-    input_Pf <- input$Pf
+    input_kBase <- input$kBase
     if (!scenario_changed){
       mod_pars[['timeStop']] <- input_timeStop
       mod_pars[['timeStep']] <- input_timeStep
-      mod_pars[['Pf']] <- as.numeric(input_Pf[1,])
-      x <- get_scenario(scenario_name, modified_parameters = mod_pars)
+      mod_pars[['kBase']] <- as.numeric(input_kBase[1,])
+      x <- try(get_scenario(scenario_name, modified_parameters = mod_pars))
     }  else {
       x <- get_scenario(scenario_name)
       scenario_changed <<- FALSE
+    }
+    if (class(x) == 'try-error') {
+      err_msg <<- attr(x, 'condition')[[1]]
+      x <- get_scenario(scenario_name)
     }
 
     print ('---------> UPDATED - end')
@@ -50,8 +55,22 @@ shinyServer(function(input, output, session) {
     make_scenario_ui(updated_scenario())
   })
 
+  output$status <- renderText({
+    x <- updated_scenario()
+    if (is.null(err_msg)) ret_val <- 'System Ran Successfully'
+    else {
+      ret_val <- paste('The following error(s) were encountered: "',
+                   err_msg,
+                   '". Resetting to the values specified in the saved scenario',
+                   sep = "")
+
+    }
+    err_msg <<- NULL
+    return(ret_val)
+  })
+
   output$pars <- renderPrint({
-      print(updated_scenario())
+    print(updated_scenario())
   })
 
   output$Strain <- renderPlot({
