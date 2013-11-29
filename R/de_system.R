@@ -76,7 +76,7 @@ eventFunc <- function(t, y, parms){
   find_event_type <- function(t, state){
     event_type <- 'treatment_change_event'
     # I have no idea why there is an event at t==0
-    if (t ==0) {event_type <- 'weird_first_event'}
+#    if (t ==0) {event_type <- 'weird_first_event'}
     if (abs(state[N_S+2]-stochasticEventThreshold) < 0.001){
       event_type <- 'mutation_event'
     }
@@ -127,28 +127,24 @@ eventFunc <- function(t, y, parms){
   
   treatment_change_event <- function(){
     treatmentChanges <- lapply(treatments, `[[`, 't')
-    treatmentTriggered <- which(t > unlist(treatmentChanges))
+    treatmentTriggered <- which(t >= unlist(treatmentChanges))
     k <<- baseRate * kBase * (1 - treatments[[treatmentTriggered]]$Ts * treatments[[treatmentTriggered]]$A) # effective per strain invasion rates
     treatments[[treatmentTriggered]] <<- NULL
     return (state)
   }
-  weird_first_event <- function(){
-    return(state)
-  }
   
   event_type <- find_event_type(t, state)
+  
   #print (c(t, event_type))
   
-  if (event_type == 'weird_first_event'){
-    state <- state
-  }
+
   if (event_type == 'mutation_event'){
     state <- mutation_event()
   }
   if (event_type == 'extinction_event'){
     state <- extinction_event()
   }
-  if (event_type == 'treatment_change'){
+  if (event_type == 'treatment_change_event'){
     state <- treatment_change_event()
   }
   # I cant get the switch to work - stick with the if's for now

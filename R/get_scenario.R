@@ -58,6 +58,22 @@ get_all_scenarios <- function(){
              2, 0, 2,
              4, 2, 0)
   )
+
+  userParsLib[['tc_Multi_Treat_1_0']] <- list(
+    timeStep = 1,
+    timeStop = 1000,
+    systemName = "tc_Multi_Treat_1_0",
+    systemDescription = "One wild type virus with no mutations possible. Two different treatment regnimens",
+    kBase = c(1), # Fitnesses of the different strains
+    treatments = list(list(t = 0, A = 0.0, Ts = c(0)),
+                      list(t = 500, A = 0.0, Ts = c(0.1))),
+    mutationAcceleration = 0.15, # adjustment to make the timescales reasonable
+    Td = 0.2, # Tcell depletion - ratio of pre-infected to post-infected equilibria
+    N_S = 1, # Number of strains in system
+    offStrains = numeric(0), # Strains not present in the initial system
+    stochasticEventThresholdSource = function(){return(runif(1))}, # draw this number randomly in production situation
+    mutMat = c(0)
+  )
   
   userParsLib[['AccuTams_1_2_3']] <- list(
     timeStep = 1,

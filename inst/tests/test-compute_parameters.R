@@ -6,7 +6,9 @@ test_that("the compute_parameters function matches precomputed values",{
   params <- compute_parameters(scenario_parameters)
   expected_params <- list(timeStep = 1, timeStop = 1500, systemName = "tc_AccuTams_1_2", 
     systemDescription = "One wild strain is present initially. Two other strains can evolve - 2 point mutations to get\n    get one strain and from this strain another 2 point mutations to get to a third possible strain.\n    Strains have increasing fitness.", 
-    kBase = c(1, 1, 1), treatments = list(), mutationAcceleration = 1, 
+    kBase = c(1, 1, 1), 
+    treatments = list(list(t = 0, A = 1, Ts = 1-c(0.807442176870748, 0.857971014492754, 0.95))), 
+    mutationAcceleration = 1, 
     Td = 0.2, N_S = 3, offStrains = c(2, 3), stochasticEventThresholdSource = function () 
     {
         return(runif(1))

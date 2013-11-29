@@ -1,4 +1,5 @@
 export(calc_growth_time)
+export(compute_fitnessAdjustment)
 export(compute_newStrainLevel)
 export(compute_offThreshold)
 export(compute_parameters)

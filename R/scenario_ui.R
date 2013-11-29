@@ -18,10 +18,24 @@ make_scenario_ui <- function(scenario){
                    ncol = sqrt(length(mutMat)))
   mutMat <- data.frame(mutMat)
   names(mutMat) <- paste("Strain", 1:scenario$N_S, sep = "_")
+  treatment_ui <- NULL
+  i <- 0
+  for (treatment in scenario$treatments){
+    i <- i + 1
+    treatment_ui <- c(treatment_ui, 
+      numericInput(str_c('t', i),
+                   str_c('Start Time for Treatment Regimen ', i),
+                   treatment$t),
+      numericInput(str_c('A', i),
+                   str_c('Adherence to Treatment Regimen ', i),
+                   treatment$A)
+      )
+  }
   c(
     numericInput('timeStep', 'timeStep', scenario$timeStep),
     numericInput('timeStop', 'timeStop', scenario$timeStop),
     matrixInput('kBase', 'kBase', data.frame(as.list(kBase))),
-    matrixInput('mutMat', 'mutMat', mutMat)
+    matrixInput('mutMat', 'mutMat', mutMat),
+    treatment_ui
     )
 }
