@@ -27,3 +27,4 @@ Collate:
     'dataset_docs.R'
     'shiny_app.R'
     'scenario_ui.R'
+    'scenario_treatment_ui.R'

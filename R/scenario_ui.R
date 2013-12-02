@@ -18,27 +18,17 @@ make_scenario_ui <- function(scenario){
                    ncol = sqrt(length(mutMat)))
   mutMat <- data.frame(mutMat)
   names(mutMat) <- paste("Strain", 1:scenario$N_S, sep = "_")
-  treatment_ui <- NULL
-  i <- 0
-  for (treatment in scenario$treatments){
-    i <- i + 1
-    treatment_ui <- c(treatment_ui, 
-      numericInput(str_c('t', i),
-                   str_c('Start Time for Treatment Regimen ', i),
-                   treatment$t),
-      numericInput(str_c('A', i),
-                   str_c('Adherence to Treatment Regimen ', i),
-                   treatment$A),
-      matrixInput(str_c('Ts',i),
-                  str_c('Susceptibilities to Regimen ', i),
-                  data.frame(as.list(treatment$Ts)))
-      )
-  }
-  c(
-    numericInput('timeStep', 'timeStep', scenario$timeStep),
-    numericInput('timeStop', 'timeStop', scenario$timeStop),
-    matrixInput('kBase', 'kBase', data.frame(as.list(kBase))),
-    matrixInput('mutMat', 'mutMat', mutMat),
-    treatment_ui
-    )
+  treatment_ui <- treatment_ui_from_scenario(scenario)
+  return(c(numericInput('timeStep', 'timeStep', scenario$timeStep),
+           numericInput('timeStop', 'timeStop', scenario$timeStop),
+           matrixInput('kBase', 'kBase', data.frame(as.list(kBase))),
+           matrixInput('mutMat', 'mutMat', mutMat),
+           treatment_ui
+           )
+  )
 }
+
+# Other functions
+# get_number_of_treatments
+# construct_updates_to_treatment_inputs
+# get_treatment_inputs
