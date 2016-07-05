@@ -12,8 +12,7 @@ Depends:
     stringr,
     deSolve,
     reshape2,
-    shiny,
-    shinyIncubator
+    shiny
 License: GPL-2
 Collate:
     'scenario.R'
