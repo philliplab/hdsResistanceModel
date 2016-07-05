@@ -12,7 +12,7 @@ install.packages('devtools') # Install the devtools package for the install_gith
 
 library(devtools)
 
-install_github('hdsResistanceModel', 'philliplab')
+install_github('philliplab/hdsResistanceModel')
 
 library(hdsResistanceModel)
 ```
